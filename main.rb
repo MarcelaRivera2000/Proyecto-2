@@ -1,3 +1,9 @@
+load 'TDA_Arbol.rb'
+load 'TDA_Grafo.rb'
+
+Arbol = TDA_Arbol.new()
+Grafo = TDA_Grafo.new()
+
 def menu
     puts "*************MENU*************"
     puts "*1. Algoritmos sobre Árboles *"
@@ -9,6 +15,12 @@ def menu
     if opcion == 3 then exit end
     puts "\n\n"
     return opcion
+end
+
+def Leer_Archivo
+    print "Ingrese el nombre del archivo de texto: "
+    texto = gets
+    return texto
 end
 
 def Menu_Arboles
@@ -43,21 +55,21 @@ end
 
 def Acciones_Arbol( opcion )
     case opcion
-        when 1 then 
-        when 2 then
-        when 3 then
-        when 4 then
-        when 5 then
-        when 6 then
+        when 1 then Arbol.Leer( Leer_Archivo() )
+        when 2 then Arbol.PreOrder()
+        when 3 then Arbol.InOrder()
+        when 4 then Arbol.PostOrder()
+        when 5 then Arbol.Codificador_Huffman()
+        when 6 then Arbol.Decodificador_Huffman()
     end
 end
 
 def Acciones_Grafos( opcion )
     case opcion
-        when 1 then 
-        when 2 then
-        when 3 then
-        when 4 then
+        when 1 then Grafo.Leer()
+        when 2 then Grafo.Prim()
+        when 3 then Grafo.Kruskal()
+        when 4 then Grafo.Floyd()
     end
 end
 
