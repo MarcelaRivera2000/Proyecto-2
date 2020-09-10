@@ -6,6 +6,7 @@ def menu
     puts "******************************"
     print "Ingrese una opcion: "
     opcion = gets.chomp.to_i
+    if opcion == 3 then exit end
     puts "\n\n"
     return opcion
 end
@@ -61,10 +62,6 @@ def Acciones_Grafos( opcion )
 end
 
 loop do
-    if menu == 1; Acciones_Arbol( Menu_Arboles() )
-    elseif menu == 2; Acciones_Grafos( Menu_Grafos() )
-    else break;
-    end
+    opcion = menu()
+    ( opcion == 1 )? Acciones_Arbol( Menu_Arboles() ) : Acciones_Grafos( Menu_Grafos() )
 end
-exit
-
