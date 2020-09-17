@@ -1,4 +1,4 @@
-class Arbol
+class Arbol < TDA_Arbol
     
     
     def initialize()
