@@ -1,8 +1,10 @@
 class TDA_Arbol
     def initialize()
     end
-    def Leer( archivoTxt ) 
-        puts "Leido -> #{archivoTxt}\n\n"
+    def Leer( archivoTxt )      
+        archivo = File.read( archivoTxt )
+        lines = archivo.split("\n")
+        
     end
     def PreOrder
     end
