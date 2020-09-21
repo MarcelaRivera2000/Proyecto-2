@@ -66,7 +66,7 @@ end
 
 def Acciones_Grafos( opcion )
     case opcion
-        when 1 then Grafo.Leer()
+        when 1 then Grafo.Leer( Leer_Archivo() )
         when 2 then Grafo.Prim()
         when 3 then Grafo.Kruskal()
         when 4 then Grafo.Floyd()
