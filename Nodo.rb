@@ -16,7 +16,7 @@ class Nodo
         @hijoIzquierdo=n_hijo
     end
 
-    def getIzquiedo
+    def getIzquierdo
         return @hijoIzquierdo
     end
     def getDerecho

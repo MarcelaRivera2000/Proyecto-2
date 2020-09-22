@@ -1,5 +1,6 @@
 load 'Nodo.rb'
-class Arbol
+load 'TDA_Arbol.rb'
+class Arbol < TDA_Arbol
     def initialize(n_raiz)
         @raiz=n_raiz
     end
@@ -9,7 +10,9 @@ class Arbol
     end
     def postorden(raiz)
         if raiz != nil
-            
+            postorden(raiz.getIzquierdo)
+            postorden(raiz.getDerecho)
+            puts "[ #{raiz.getDato} ]"
         end
     end
     def codificador_Huffman
@@ -20,3 +23,4 @@ class Arbol
         return @raiz
     end
 end
+

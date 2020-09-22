@@ -1,7 +1,8 @@
 load 'TDA_Arbol.rb'
 load 'TDA_Grafo.rb'
+load 'Arbol.rb'
 
-Arbol = TDA_Arbol.new()
+Arbol = Arbol.new()
 Grafo = TDA_Grafo.new()
 
 def menu
