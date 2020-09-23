@@ -8,14 +8,17 @@ class Arbol < TDA_Arbol
     end 
     def preorder
     end
-    def postorden(raiz)
+    def postOrder(raiz)
         if raiz != nil
             postorden(raiz.getIzquierdo)
             postorden(raiz.getDerecho)
             puts "[ #{raiz.getDato} ]"
         end
     end
-    def codificador_Huffman
+    def codificador_Huffman(texto)
+        for i in 0..texto.size 
+            puts "hello"
+        end
     end
     def descodificador_Huffman
     end

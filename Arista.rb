@@ -1,10 +1,10 @@
 class Arista
-    peso = nil
-    destino = nil
-    def initialize()
+    def initialize(origen,destino)
+        @v_origen=origen
+        @v_destino=destino
     end
 
-   def setDestino( destino )
+    def setDestino( destino )
         @destino = destino
     end
 
