@@ -15,6 +15,7 @@ class MatrizAbyacencia
                             for n in 0..aux1.size
                                 if(aux[k].getDestino==aux2[n].getDestino)
                                     @matrix[i][j]=1
+                                    cont =1
                                 end
                                 if(cont==0)
                                     @matrix[i][j]=0
