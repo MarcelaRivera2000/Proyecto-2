@@ -6,7 +6,7 @@ class TDA_Grafo
     end
     #$matriz = Array.new(1000){ Array.new(1000) }
     def Matriz_Adyacencia( i, j, peso, nVertices )
-       matriz = Array.new(nVertices.to_i){ Array.new(nVertices.to_i) }
+        matriz = Array.new(nVertices.to_i){ Array.new(nVertices.to_i) }
         if( i.to_i == -1 && j.to_i == -1 ) then matriz[i.to_i][j.to_i] = "INFINITO" 
             else
                 matriz[i.to_i][j.to_i] = peso.to_i
