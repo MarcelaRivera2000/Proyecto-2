@@ -1,31 +1,9 @@
 class Nodo
-    def initialize(n_dato)
-        @dato=n_dato
-        @padre=nil
-        @hijoIzquierdo=nil
-        @hijoDerecho=nil
-    end
-
-    def setPadre(n_padre)
-        @padre=n_padre
-    end
-    def setDerecho(n_hijo)
-        @hijoDerecho=n_hijo
-    end
-    def setIzquierdo(n_hijo)
-        @hijoIzquierdo=n_hijo
-    end
-
-    def getIzquierdo
-        return @hijoIzquierdo
-    end
-    def getDerecho
-        return @hijoDerecho
-    end
-    def getPadre
-        return @padre
-    end
-    def getDato
-        return @dato
-    end
+    attr_accessor :dato , :padre , :hijoIzquierdo , :hijoDerecho
+    def initialize(n_dato,padre)
+        self.dato=n_dato
+        self.padre=padre
+        self.hijoDerecho=nil
+        self.hijoIzquierdo=nil
+    end 
 end
