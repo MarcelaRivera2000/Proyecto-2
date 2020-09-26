@@ -1,6 +1,8 @@
 load 'Arbol.rb'
 load 'Nodo.rb'
-
+puts "ds: "
+x=gets
+puts x[1]
 
 puts "RAIZ: "
 x=gets.chomp.to_i
