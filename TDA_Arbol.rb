@@ -9,7 +9,6 @@ class TDA_Arbol
     def preorder
         
     end
-
     def postOrder(raiz)
         if raiz != nil
             postOrder(raiz.hijoIzquierdo)
@@ -22,6 +21,8 @@ class TDA_Arbol
         for i in 0..texto.size 
             puts "hello"
         end
+    def codificador_Huffman()
+        
     end
     def descodificador_Huffman
     end
@@ -63,5 +64,3 @@ class TDA_Arbol
         postOrder(temp)
         #return temp
     end
-
-end

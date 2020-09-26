@@ -30,7 +30,6 @@ class MatrizAbyacencia
             end
         end
     end
-    
     def getMatriz
         return @matriz
     end
