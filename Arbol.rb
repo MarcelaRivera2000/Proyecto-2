@@ -1,8 +1,10 @@
 load 'Nodo.rb'
 load 'TDA_Arbol.rb'
 class Arbol < TDA_Arbol
-    def initialize(n_raiz)
-        @raiz=n_raiz
+  #  def initialize(n_raiz)
+   #     @raiz = n_raiz
+    #end
+    def initialize
     end
     def leerArchivo
     end 
