@@ -24,6 +24,7 @@ class TDA_Grafo
 
     def Leer( archivoTxt )
         archivoTxt = "C:/Users/James Josué Molina/Desktop/Prueba3.txt"   
+        archivoTxt = ""
         archivo = File.read( archivoTxt )
         lines = archivo.split("\n")
         vertices = Array.new
@@ -63,9 +64,11 @@ class TDA_Grafo
     def Floyd
     
     end
+
     def usarParametros( elementos )
         puts "Destino: #{elementos[0]} Y Peso: #{elementos[1]}" 
     end
+
     def matrix( matriz, nVertices )
         for fila in(0..nVertices.to_i-1)
             for columna in(0..nVertices.to_i-1)
@@ -74,4 +77,5 @@ class TDA_Grafo
             puts ""
         end
     end
+
 end

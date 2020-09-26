@@ -1,9 +1,8 @@
 load 'TDA_Arbol.rb'
 load 'TDA_Grafo.rb'
-load 'Arbol.rb'
 
-Arbol = Arbol.new()
-Grafo = TDA_Grafo.new()
+Arbol = TDA_Arbol.new
+Grafo = TDA_Grafo.new
 
 def menu
     puts "*************MENU*************"
@@ -59,7 +58,7 @@ def Acciones_Arbol( opcion )
         when 1 then Arbol.Leer( Leer_Archivo() )
         when 2 then Arbol.PreOrder()
         when 3 then Arbol.InOrder()
-        when 4 then Arbol.PostOrder()
+        when 4 then Arbol.PostOrder(arbol.getRaiz)
         when 5 then Arbol.Codificador_Huffman()
         when 6 then Arbol.Decodificador_Huffman()
     end

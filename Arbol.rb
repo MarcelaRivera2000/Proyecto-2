@@ -1,10 +1,14 @@
 load 'Nodo.rb'
 load 'TDA_Arbol.rb'
+
 class Arbol < TDA_Arbol
-  #  def initialize(n_raiz)
-   #     @raiz = n_raiz
-    #end
-    def initialize
+    def initialize()
+    end
+    def setRaiz(n_raiz)
+        @raiz=n_raiz
+    end
+    def getRaiz
+        return @raiz
     end
     def leerArchivo
     end 
@@ -18,14 +22,9 @@ class Arbol < TDA_Arbol
         end
     end
     def codificador_Huffman(texto)
-        for i in 0..texto.size 
-            puts "hello"
-        end
+        
     end
+    
     def descodificador_Huffman
     end
-    def getRaiz
-        return @raiz
-    end
 end
-
