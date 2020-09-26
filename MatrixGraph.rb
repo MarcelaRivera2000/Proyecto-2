@@ -5,7 +5,7 @@ class MatrixGraph < TDA_Grafo
             for j in(0..vertices)
                 if i == j then matriz[i][j] = "INFINITO"
                 else 
-                    
+
                 end
             end
         end

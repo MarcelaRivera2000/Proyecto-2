@@ -23,7 +23,7 @@ class TDA_Grafo
     end 
 
     def Leer( archivoTxt )
-        archivoTxt = "/home/james/Escritorio/prueba14"   
+        archivoTxt = "C:/Users/James Josué Molina/Desktop/Prueba3.txt"   
         archivo = File.read( archivoTxt )
         lines = archivo.split("\n")
         vertices = Array.new
