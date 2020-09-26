@@ -1,7 +1,7 @@
 load 'Vertice.rb'
 class MatrizAbyacencia
     def initialize(tam,m)
-        @matrix=Array.new(tam,0){Array.new(tam,0)}
+        @matrix=Array.new(tam.to_i,0){Array.new(tam.to_i,0)}
         for i in 0 .. tam
             for j in 0.. tam
                 if(i==j)
