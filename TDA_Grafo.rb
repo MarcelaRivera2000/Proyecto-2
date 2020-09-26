@@ -23,7 +23,6 @@ class TDA_Grafo
     end 
 
     def Leer( archivoTxt )
-        archivoTxt = ""   #no csajlkdaskjdslakjdklasjdljkasljdslkds aqui
         archivo = File.read( archivoTxt )
         lines = archivo.split("\n")
         vertices = Array.new

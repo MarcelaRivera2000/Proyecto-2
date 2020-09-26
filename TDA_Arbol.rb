@@ -6,20 +6,15 @@ class TDA_Arbol
     end 
     def preorder
     end
-    def postOrder()
+    def postOrder(raiz)
         if raiz != nil
             postorden(raiz.hijoIzquierdo)
             postorden(raiz.hijoDerecho)
             puts "[ #{raiz.dato} ]"
         end
     end
-<<<<<<< HEAD
-end
-=======
-    def codificador_Huffman(texto)
-        for i in 0..texto.size 
-            puts "hello"
-        end
+    def codificador_Huffman()
+        
     end
     def descodificador_Huffman
     end
@@ -57,4 +52,3 @@ end
     end
 end
 
->>>>>>> 1032d3441cd562ad49ff7b2d6c5234fe344f33d9

@@ -1,14 +1,8 @@
 load 'TDA_Arbol.rb'
 load 'TDA_Grafo.rb'
 
-<<<<<<< HEAD
-arbol = Arbol.new()
-grafo = TDA_Grafo.new()
-=======
-
 Arbol = TDA_Arbol.new
 Grafo = TDA_Grafo.new()
->>>>>>> 1032d3441cd562ad49ff7b2d6c5234fe344f33d9
 
 def menu
     puts "*************MENU*************"
