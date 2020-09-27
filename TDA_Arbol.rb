@@ -7,13 +7,17 @@ class TDA_Arbol
     end 
 
     def preorder
-        
+        if raiz != nil
+            postOrder(raiz.hijoDerecho)
+            postOrder(raiz.hijoIzquierdo)
+            print "[ #{raiz.dato} ]"
+        end
     end
     def postOrder(raiz)
         if raiz != nil
             postOrder(raiz.hijoIzquierdo)
             postOrder(raiz.hijoDerecho)
-            puts "[ #{raiz.dato} ]"
+            print "[ #{raiz.dato} ]"
         end
     end
 
@@ -21,6 +25,8 @@ class TDA_Arbol
         for i in 0..texto.size 
             puts "hello"
         end
+    end 
+
     def codificador_Huffman()
         
     end
@@ -28,7 +34,8 @@ class TDA_Arbol
     end
 
     def Leer( archivoTxt )
-        archivoTxt = "C:/Users/James Josué Molina/Desktop/jjjj.txt"   
+        print archivoTxt
+        #archivoTxt = "C:/Users/James Josué Molina/Desktop/jjjj.txt"   
         if(File.file?(archivoTxt))
             archivo = File.read( archivoTxt )
             lines = archivo.split("\n")
@@ -64,3 +71,4 @@ class TDA_Arbol
         postOrder(temp)
         #return temp
     end
+end

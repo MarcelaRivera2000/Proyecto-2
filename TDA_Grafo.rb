@@ -23,8 +23,6 @@ class TDA_Grafo
     end 
 
     def Leer( archivoTxt )
-        archivoTxt = "C:/Users/James Josué Molina/Desktop/Prueba3.txt"   
-        archivoTxt = ""
         archivo = File.read( archivoTxt )
         lines = archivo.split("\n")
         vertices = Array.new
@@ -51,7 +49,7 @@ class TDA_Grafo
             i += 1
         end  
         matrix(@matriz, @nVertices)  
-        adyacencia = MatrizAbyacencia.new(@nVertices,@matriz_)
+       # adyacencia = MatrizAbyacencia.new(@nVertices,@matriz_)
     end
     
     def Prim

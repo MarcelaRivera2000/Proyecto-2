@@ -2,11 +2,7 @@ load 'TDA_Arbol.rb'
 load 'TDA_Grafo.rb'
 
 Arbol = TDA_Arbol.new
-<<<<<<< HEAD
 Grafo = TDA_Grafo.new
-=======
-Grafo = TDA_Grafo.new()
->>>>>>> 2a316102a0285c7dac1a98b21b8d9d2e0805ea03
 
 def menu
     puts "*************MENU*************"
@@ -24,7 +20,7 @@ end
 def Leer_Archivo
     print "Ingrese el nombre del archivo de texto: "
     texto = gets
-    return texto
+    return texto.delete!("\n")
 end
 
 def Menu_Arboles
