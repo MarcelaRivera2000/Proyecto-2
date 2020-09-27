@@ -1,13 +1,19 @@
 load "Nodo.rb"
-
 class TDA_Arbol
     attr_accessor :raiz
     def initialize()
         self.raiz=Nodo.new("0",nil)
     end 
-
     def preorder
-        
+    end
+    def inOrder(nodo_r)
+        if(nodo_r == nil)
+            return 
+        else
+            inOrder(nodo_r.hijoIzquierdo)
+            print "#{nodo_r.dato} " 
+            inOrder(nodo_r.hijoDerecho)
+        end
     end
     def postOrder(raiz)
         if raiz != nil
@@ -16,19 +22,12 @@ class TDA_Arbol
             puts "[ #{raiz.dato} ]"
         end
     end
-
-    def codificador_Huffman(texto)
-        for i in 0..texto.size 
-            puts "hello"
-        end
-    def codificador_Huffman()
+    def codificador_Huffman(archivoTxt)
         
     end
     def descodificador_Huffman
     end
-
     def Leer( archivoTxt )
-        archivoTxt = "C:/Users/James Josué Molina/Desktop/jjjj.txt"   
         if(File.file?(archivoTxt))
             archivo = File.read( archivoTxt )
             lines = archivo.split("\n")
@@ -39,17 +38,19 @@ class TDA_Arbol
             while (i<lines.length)
                 if(lines[i] != "")
                     hijos = lines[i].split(",")
-                    temp.hijoDerecho= Nodo.new(hijos[0],temp) 
-                    temp.hijoIzquierdo= Nodo.new(hijos[1],temp)
+                    temp.hijoIzquierdo= Nodo.new(hijos[0],temp) 
+                    temp.hijoDerecho= Nodo.new(hijos[1],temp)
+                    temp = temp.hijoDerecho
+                    control = 1
                 else
                     if (temp.dato != "0")
-                        temp = temp.padre
+                        temp = temp.padre 
                     end
                     if control == 1 
-                        temp = temp.hijoDerecho
+                        temp = temp.hijoIzquierdo
                         control = 0
                     else
-                        temp = temp.hijoIzquierdo
+                        temp = temp.hijoDerecho
                         control = 1
                     end
                 end
@@ -61,6 +62,6 @@ class TDA_Arbol
         while temp.padre != nil
             temp = temp.padre
         end
-        postOrder(temp)
-        #return temp
+        return temp
     end
+end
