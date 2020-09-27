@@ -2,14 +2,14 @@ load "Nodo.rb"
 class TDA_Arbol
     attr_accessor :raiz
     def initialize()
-        self.raiz=Nodo.new("0",nil)
+        
     end 
 
     def preOrder(raiz)
         if raiz != nil
             print "[ #{raiz.dato} ]"
-            postOrder(raiz.hijoIzquierdo)
-            postOrder(raiz.hijoDerecho)
+            preOrder(raiz.hijoIzquierdo)
+            preOrder(raiz.hijoDerecho)
         end
     end
 
@@ -31,7 +31,7 @@ class TDA_Arbol
         end
     end
 
-    def codificador_Huffman(texto,archivoTxt)
+    def codificador_Huffman(texto)
         array=Array.new
         for i in 0..texto.length
             text=""
@@ -103,38 +103,54 @@ class TDA_Arbol
             archivo = File.read( archivoTxt )
             lines = archivo.split("\n")
             numero_hijos = lines[0].to_i
-            i = 1;
-            temp = self.raiz
-            control = 1
-            while (i<lines.length)
+            i = lines.length-1;
+            nodos = []
+            while (i>0)
                 if(lines[i] != "")
                     hijos = lines[i].split(",")
-                    temp.hijoIzquierdo= Nodo.new(hijos[0],temp) 
-                    temp.hijoDerecho= Nodo.new(hijos[1],temp)
-                    temp = temp.hijoDerecho
+                    nodo_nuevo = Nodo.new
+                    n_derecho = Nodo.new
+                    n_izquierdo = Nodo.new
+                    n_derecho.dato = hijos[1]
+                    n_izquierdo.dato = hijos[0]
+                    nodo_nuevo.hijoDerecho = n_derecho
+                    nodo_nuevo.hijoIzquierdo = n_izquierdo
+                    nodos[nodos.length] = nodo_nuevo
+                end
+                i-=1
+            end
+            i = 0 
+            control = 1 
+            if lines.length%2 == 0
+                control = 0
+            end
+            while (i < nodos.length)
+                self.raiz = crea1(nodos[i],control)
+                if control == 1 
+                    control = 0 
+                else 
                     control = 1
-                else
-                    if (temp.dato != "0")
-                        temp = temp.padre 
-                    end
-                    if control == 1 
-                        temp = temp.hijoIzquierdo
-                        control = 0
-                    else
-                        temp = temp.hijoDerecho
-                        control = 1
-                    end
                 end
                 i+=1
             end
+            self.raiz.dato = "0"
         else 
             puts "Archivo no existe" 
         end
-        while temp.padre != nil
-            temp = temp.padre
+    end
+
+    def crea1 (a1,i)
+        if(self.raiz == nil)
+            self.raiz = a1
+        elsif(i == 1)
+            a1.hijoDerecho.hijoIzquierdo = self.raiz.hijoIzquierdo
+            a1.hijoDerecho.hijoDerecho = self.raiz.hijoDerecho
+            self.raiz.padre = a1.hijoDerecho
+        else
+            a1.hijoIzquierdo.hijoIzquierdo = self.raiz.hijoIzquierdo
+            a1.hijoIzquierdo.hijoDerecho = self.raiz.hijoDerecho
+            self.raiz.padre = a1.hijoIzquierdo
         end
-        postOrder(temp)
-        return temp
-        raiz = temp
+        a1
     end
 end

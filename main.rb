@@ -26,6 +26,7 @@ def Leer_Archivo
 end
 
 def Menu_Arboles
+    puts ""
     puts "***********MENU ARBOLES***********"
     puts "*1. Leer Árbol de un archivo     *"
     puts "*2. Imprimir recorrido preorder  *"
@@ -42,6 +43,7 @@ def Menu_Arboles
 end
 
 def Menu_Grafos
+    puts ""
     puts "**********MENU GRAFOS***********"
     puts "*1. Leer grafo de un archivo   *"
     puts "*2. Prim                       *"
@@ -56,23 +58,31 @@ def Menu_Grafos
 end
 #PruebaHuffman.txt
 def Acciones_Arbol( opcion )
-    case opcion
-        when 1 then Arbol.Leer( Leer_Archivo() )
-        when 2 then Arbol.preOrder(Arbol.raiz)
-        when 3 then Arbol.inOrder(Arbol.raiz)
-        when 4 then Arbol.postOrder(Arbol.raiz)
-        when 5 then Arbol.codificador_Huffman("Hola mundo",Leer_Archivo())
-        when 6 then Arbol.decodificador_Huffman()
+    loop do
+        case opcion
+            when 1 then Arbol.Leer( Leer_Archivo() )
+            when 2 then Arbol.preOrder(Arbol.raiz)
+            when 3 then Arbol.inOrder(Arbol.raiz)
+            when 4 then Arbol.postOrder(Arbol.raiz)
+            when 5 then Arbol.codificador_Huffman("hola mundo")
+            when 6 then Arbol.descodificador_Huffman()
+        end
+        opcion = Menu_Arboles()
+        if( opcion == 7 ) then break end
     end
 end
 
 def Acciones_Grafos( opcion )
-    case opcion
-        when 1 then Grafo.Leer( Leer_Archivo() )
-        when 2 then Grafo.Prim()
-        when 3 then Grafo.Kruskal()
-        when 4 then Grafo.Floyd()
-    end
+    loop do
+        case opcion
+            when 1 then Grafo.Leer( Leer_Archivo() )
+            when 2 then Grafo.Prim()
+            when 3 then Grafo.Kruskal()
+            when 4 then Grafo.Floyd()
+        end
+        opcion = Menu_Grafos()
+        if( opcion == 5 ) then break end
+    end    
 end
 
 loop do
