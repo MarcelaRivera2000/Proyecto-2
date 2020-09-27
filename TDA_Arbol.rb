@@ -1,5 +1,4 @@
 load "Nodo.rb"
-
 class TDA_Arbol
     attr_accessor :raiz
     def initialize()
@@ -19,6 +18,7 @@ class TDA_Arbol
             return 
         else
             inOrder(nodo_r.hijoIzquierdo)
+            print "#{nodo_r.dato} " 
             print "[ #{nodo_r.dato} ]"
             inOrder(nodo_r.hijoDerecho)
         end
@@ -32,8 +32,7 @@ class TDA_Arbol
         end
     end
 
-    def codificador_Huffman()
-        
+    def codificador_Huffman(archivoTxt)
     end
     def descodificador_Huffman
     end
@@ -94,6 +93,5 @@ class TDA_Arbol
         end
         a1
     end
-end
 
-        
+end
