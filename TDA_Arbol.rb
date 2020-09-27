@@ -17,8 +17,7 @@ class TDA_Arbol
         if(nodo_r == nil)
             return 
         else
-            inOrder(nodo_r.hijoIzquierdo)
-            print "#{nodo_r.dato} " 
+            inOrder(nodo_r.hijoIzquierdo) 
             print "[ #{nodo_r.dato} ]"
             inOrder(nodo_r.hijoDerecho)
         end
@@ -32,8 +31,70 @@ class TDA_Arbol
         end
     end
 
-    def codificador_Huffman(archivoTxt)
+    def codificador_Huffman(texto,archivoTxt)
+        array=Array.new
+        for i in 0..texto.length
+            text=""
+            frecuencia=0
+            aux=texto[i]
+            for j in 0..texto.length
+                if(aux==texto[j])
+                    frecuencia+=1
+                end
+            end
+            text<<" #{aux} , #{frecuencia}"
+            array<<text
+        end
+        size=array.size
+        for l in 0..array.size
+            cont=0
+            aux=array[l]
+            for k in 0 .. array.size
+                if(aux==array[k])
+                    cont+=1
+                    if cont>=2
+                        array.delete_at(k)
+                    end
+                end
+            end
+        end
+        array2=ordenamiento(array)
+        for o in 0..array2.size
+            puts array2[o]
+        end
+        
+
     end
+    
+    def ordenamiento(array)
+        for i in 1..array.size
+            for j in 0..array.size-2
+                num=array[j].split(",")
+                num2=array[j+1].split(",")
+                if(num[1].to_i > num2[1].to_i)
+                    aux=array[j]
+                    array[j]=array[j+1]
+                    array[j+1]=aux
+                end
+            end
+        end
+        return array
+    end
+
+    def recursivo(nodo,text)
+        if(nodo.padre !=nil)
+            aux=nodo.padre
+            if(aux.hijoIzquierdo == nodo)
+                text<<"0"
+            else
+                text<<"1"
+            end
+            recursivo(aux,text)
+        else
+            return text
+        end
+    end
+
     def descodificador_Huffman
     end
 
@@ -71,10 +132,9 @@ class TDA_Arbol
         end
         while temp.padre != nil
             temp = temp.padre
-
         end
+        postOrder(temp)
         return temp
         raiz = temp
     end
-
 end

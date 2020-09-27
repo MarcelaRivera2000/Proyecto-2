@@ -54,14 +54,14 @@ def Menu_Grafos
     puts "\n\n"
     return opcion
 end
-
+#PruebaHuffman.txt
 def Acciones_Arbol( opcion )
     case opcion
         when 1 then Arbol.Leer( Leer_Archivo() )
         when 2 then Arbol.preOrder(Arbol.raiz)
         when 3 then Arbol.inOrder(Arbol.raiz)
         when 4 then Arbol.postOrder(Arbol.raiz)
-        when 5 then Arbol.codificador_Huffman()
+        when 5 then Arbol.codificador_Huffman("Hola mundo",Leer_Archivo())
         when 6 then Arbol.decodificador_Huffman()
     end
 end
