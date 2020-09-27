@@ -4,8 +4,6 @@ class TDA_Arbol
     def initialize()
         self.raiz=Nodo.new("0",nil)
     end 
-    def preorder
-    end
 
     def preOrder(raiz)
         if raiz != nil
@@ -33,13 +31,12 @@ class TDA_Arbol
             print "[ #{raiz.dato} ]"
         end
     end
-    def codificador_Huffman(archivoTxt)
 
-    def codificador_Huffman()
-        
+    def codificador_Huffman(archivoTxt)
     end
     def descodificador_Huffman
     end
+
     def Leer( archivoTxt )
         if(File.file?(archivoTxt))
             archivo = File.read( archivoTxt )
@@ -77,10 +74,7 @@ class TDA_Arbol
 
         end
         return temp
-    end
-end
         raiz = temp
     end
-end
 
-        
+end
