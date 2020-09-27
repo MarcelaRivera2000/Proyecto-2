@@ -5,6 +5,7 @@ Arbol = TDA_Arbol.new
 Grafo = TDA_Grafo.new
 
 def menu
+    puts ""
     puts "*************MENU*************"
     puts "*1. Algoritmos sobre Árboles *"
     puts "*2. Algoritmos sobre Grafos  *"
