@@ -6,11 +6,11 @@ class TDA_Arbol
         self.raiz=Nodo.new("0",nil)
     end 
 
-    def preorder
+    def preOrder(raiz)
         if raiz != nil
-            postOrder(raiz.hijoDerecho)
-            postOrder(raiz.hijoIzquierdo)
             print "[ #{raiz.dato} ]"
+            postOrder(raiz.hijoIzquierdo)
+            postOrder(raiz.hijoDerecho)
         end
     end
 
@@ -19,7 +19,7 @@ class TDA_Arbol
             return 
         else
             inOrder(nodo_r.hijoIzquierdo)
-            print "#{nodo_r.dato} " 
+            print "[ #{nodo_r.dato} ]"
             inOrder(nodo_r.hijoDerecho)
         end
     end
@@ -82,10 +82,10 @@ class TDA_Arbol
         end
         puts "PostOrder"
         postOrder(temp)
-        puts "\nPreOrder"
-        preOrder(temp)
         puts "\nInOrder"
         inOrder(temp)
+        puts "\nPreOrder"
+        preOrder(temp)
         #temp
     end
 end
