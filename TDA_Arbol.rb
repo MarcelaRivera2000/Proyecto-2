@@ -4,10 +4,8 @@ class TDA_Arbol
     def initialize()
         self.raiz=Nodo.new("0",nil)
     end 
-<<<<<<< HEAD
     def preorder
     end
-=======
 
     def preOrder(raiz)
         if raiz != nil
@@ -17,17 +15,13 @@ class TDA_Arbol
         end
     end
 
->>>>>>> 71a6847f20bd1e3d0306989446b111958109fde0
     def inOrder(nodo_r)
         if(nodo_r == nil)
             return 
         else
             inOrder(nodo_r.hijoIzquierdo)
-<<<<<<< HEAD
             print "#{nodo_r.dato} " 
-=======
             print "[ #{nodo_r.dato} ]"
->>>>>>> 71a6847f20bd1e3d0306989446b111958109fde0
             inOrder(nodo_r.hijoDerecho)
         end
     end
@@ -39,12 +33,9 @@ class TDA_Arbol
             print "[ #{raiz.dato} ]"
         end
     end
-<<<<<<< HEAD
     def codificador_Huffman(archivoTxt)
-=======
 
     def codificador_Huffman()
->>>>>>> 71a6847f20bd1e3d0306989446b111958109fde0
         
     end
     def descodificador_Huffman
@@ -85,14 +76,11 @@ class TDA_Arbol
             temp = temp.padre
 
         end
-<<<<<<< HEAD
         return temp
     end
 end
-=======
         raiz = temp
     end
 end
 
         
->>>>>>> 71a6847f20bd1e3d0306989446b111958109fde0
