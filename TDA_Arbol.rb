@@ -32,12 +32,6 @@ class TDA_Arbol
         end
     end
 
-    def codificador_Huffman(texto)
-        for i in 0..texto.size 
-            puts "hello"
-        end
-    end 
-
     def codificador_Huffman()
         
     end
@@ -80,13 +74,7 @@ class TDA_Arbol
             temp = temp.padre
 
         end
-        puts "PostOrder"
-        postOrder(temp)
-        puts "\nInOrder"
-        inOrder(temp)
-        puts "\nPreOrder"
-        preOrder(temp)
-        #temp
+        raiz = temp
     end
 end
 

@@ -1,5 +1,6 @@
 load 'TDA_Arbol.rb'
 load 'TDA_Grafo.rb'
+load 'Nodo.rb'
 
 Arbol = TDA_Arbol.new
 Grafo = TDA_Grafo.new
@@ -57,11 +58,11 @@ end
 def Acciones_Arbol( opcion )
     case opcion
         when 1 then Arbol.Leer( Leer_Archivo() )
-        when 2 then Arbol.PreOrder()
-        when 3 then Arbol.InOrder()
-        when 4 then Arbol.PostOrder(arbol.getRaiz)
-        when 5 then Arbol.Codificador_Huffman()
-        when 6 then Arbol.Decodificador_Huffman()
+        when 2 then Arbol.preOrder(Arbol.raiz)
+        when 3 then Arbol.inOrder(Arbol.raiz)
+        when 4 then Arbol.postOrder(Arbol.raiz)
+        when 5 then Arbol.codificador_Huffman()
+        when 6 then Arbol.decodificador_Huffman()
     end
 end
 

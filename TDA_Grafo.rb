@@ -7,7 +7,7 @@ class TDA_Grafo
         @nVertices = 0
         @matriz_ = Array.new(){Array.new()}
     end
-    #$matriz = Array.new(1000){ Array.new(1000) }
+
     def Matriz_Adyacencia( i, j, peso, nVertices )
         matriz = Array.new(nVertices.to_i){ Array.new(nVertices.to_i) }
         if( i.to_i == -1 && j.to_i == -1 ) then matriz[i.to_i][j.to_i] = "INFINITO" 
@@ -42,14 +42,12 @@ class TDA_Grafo
             datos.each do |elementos|
                 parametros = elementos.split(",")
                 @matriz[i][j] = parametros[1].chomp("\n")
-                #usarParametros( parametros )
                 j += 1
             end
             j = 0
             i += 1
         end  
         matrix(@matriz, @nVertices)  
-       # adyacencia = MatrizAbyacencia.new(@nVertices,@matriz_)
     end
     
     def Prim
@@ -57,6 +55,7 @@ class TDA_Grafo
     end
     
     def Kruskal
+
     end
     
     def Floyd
