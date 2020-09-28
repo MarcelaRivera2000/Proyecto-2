@@ -33,24 +33,27 @@ class TDA_Arbol
 
     def codificador_Huffman(texto)
         array=Array.new
+        texto.delete!("\n")
         for i in 0..texto.length
             text=""
-            frecuencia=0
+            f=0
             aux=texto[i]
-            for j in 0..texto.length
-                if(aux==texto[j])
-                    frecuencia+=1
+            for j in 0..texto.length-1
+                if(aux == texto[j] )
+                    f+=1
                 end
             end
-            text<<" #{aux} , #{frecuencia}"
-            array<<text
+            if (f!=0)
+                text<<"#{aux},#{f}"
+                array<<text    
+            end
+            
         end
-        size=array.size
-        for l in 0..array.size
+        for l in 0..array.size-1
             cont=0
             aux=array[l]
             for k in 0 .. array.size
-                if(aux==array[k])
+                if aux == array[k] 
                     cont+=1
                     if cont>=2
                         array.delete_at(k)
@@ -58,14 +61,60 @@ class TDA_Arbol
                 end
             end
         end
-        array2=ordenamiento(array)
-        for o in 0..array2.size
-            puts array2[o]
+        array=ordenamiento(array)
+        nodo1=Nodo.new()
+        nodo2=Nodo.new()
+        array2=Array.new()
+        while (array[0]!=nil && array[1]!=nil)
+            n1=array[0].split(",")
+            n2=array[1].split(",")
+            nodo1.dato=n1[0]
+            nodo1.frecuencia=n1[1]
+            nodo2.dato=n2[0]
+            nodo2.frecuencia=n2[1]
+            array.delete_at(0)
+            array.delete_at(1)
+            aux=crea2(nodo1,nodo2)
+            array2<<aux
         end
-        
+        if(array.size!=0)
+            n1=array[0].split(",")
+            nodo1.dato=n1[0]
+            nodo1.frecuencia=n1[1]
+            array.delete_at(0)
+            array2<<nodo1
+        end
+        arbol=TDA_Arbol.new
+        while (array2.size!=1)
+            for bb in 0..array2.size-1
+                puts "#{bb} -> #{array2[bb].frecuencia}"
+            end
+            array2=ordenamientofrecu(array2)
+            aux=crea2(array2[0],array2[1])
+            array2<<aux
+            if(array2.size!=1)
+                arbol.raiz=array2[array2.size-1]
+            end
+            array2.delete_at(0)
+            array2.delete_at(1)
+        end
+        puts arbol.raiz.hijoIzquierdo.frecuencia
 
     end
-    
+
+    def ordenamientofrecu(array)
+        for i in 1..array.size
+            for j in 0..array.size-2
+                if(array[j].frecuencia.to_i > array[j+1].frecuencia.to_i)
+                    aux=array[j]
+                    array[j]=array[j+1]
+                    array[j+1]=aux
+                end
+            end
+        end
+        return array
+    end
+
     def ordenamiento(array)
         for i in 1..array.size
             for j in 0..array.size-2
@@ -152,5 +201,13 @@ class TDA_Arbol
             self.raiz.padre = a1.hijoIzquierdo
         end
         a1
+    end
+
+    def crea2(a1,a2)
+        r=Nodo.new()
+        r.hijoIzquierdo=a1
+        r.hijoDerecho=a2
+        r.frecuencia=a1.frecuencia.to_i+a2.frecuencia.to_i
+        return r
     end
 end

@@ -1,5 +1,5 @@
 class Nodo
-    attr_accessor :dato , :padre , :hijoIzquierdo , :hijoDerecho
+    attr_accessor :dato , :padre , :hijoIzquierdo , :hijoDerecho, :frecuencia
     def initialize()
         
     end 

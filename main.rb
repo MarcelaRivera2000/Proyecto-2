@@ -25,6 +25,12 @@ def Leer_Archivo
     return texto.delete!("\n")
 end
 
+def Codificador
+    print "Ingrese un texto: "
+    texto=gets
+    return texto.delete!("\n")
+end
+
 def Menu_Arboles
     puts ""
     puts "***********MENU ARBOLES***********"
@@ -64,7 +70,7 @@ def Acciones_Arbol( opcion )
             when 2 then Arbol.preOrder(Arbol.raiz)
             when 3 then Arbol.inOrder(Arbol.raiz)
             when 4 then Arbol.postOrder(Arbol.raiz)
-            when 5 then Arbol.codificador_Huffman("hola mundo")
+            when 5 then Arbol.codificador_Huffman(Codificador())
             when 6 then Arbol.descodificador_Huffman()
         end
         opcion = Menu_Arboles()
