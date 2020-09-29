@@ -114,7 +114,7 @@ class TDA_Arbol
         loop do
             if( arregloNodo[0]!=nil && arregloNodo[1]!=nil ) then break end
         end 
-        while arregloNodo[0]!=nil && arregloNodo[1]!=nil
+        while arregloNodo[1]!=nil 
             arregloNodo<<crea2(arregloNodo[0],arregloNodo[1])
             arregloNodo.delete_at(0)
             arregloNodo.delete_at(0)
@@ -131,14 +131,18 @@ class TDA_Arbol
             for i in 0..arregloNodo.size()-1 do
                 print " >[#{arregloNodo[i].dato}]< "
             end
+            if (arregloNodo[1]==nil)
+                raizNueva=Nodo.new()
+                raizNueva=arregloNodo[arregloNodo.size-1]
+                puts "\nraiz: #{raizNueva.frecuencia}"
+                recursivo(raizNueva)
+                for i in 0..@arregloBinario.size() - 1 do
+                    print "[#{@arregloBinario[i]}]"
+                end
+            end
         end
-        raizNueva=Nodo.new()
-        raizNueva=arregloNodo[arregloNodo.size-1]
-        recursivo(raizNueva)
         rescue Exception => exc   
         puts "ERROR EN EL PROCESO!"
-        #TERMINAR DE ARREGLAR ARREGLO BINARIO, Y AGRUPAR TODAS LAS RAICES 
-        #DEL ARREGLO NODO
     end
 
     def recursivo(root)
