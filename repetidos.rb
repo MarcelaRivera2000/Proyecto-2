@@ -1,77 +1,77 @@
-class Caracter
-    attr_accessor :caracter, :probabilidad, :codigo, :hijos
-    def initialize(car,prob)
-        self.caracter = car
-        self.probabilidad = prob
-        self.codigo=""
-        self.hijos=[]
-    end
+texto = "holaamigoscomoestan"
 
-    def to_s
-        "caracter:#{self.caracter}=>#{self.probabilidad}"
-    end
+arreglo2 = Array.new()
 
-    def calcular
-        self.hijos.each do |hijo|
-            self.probabilidad+=hijo.probabilidad
-            self.caracter<<hijo.caracter
-        end
-    end
-    
-    def recorrer(inicio,acumulado)
-        contador=0
-        inicio.each do |item|
-            item.codigo<<acumulado
-            if(item.codigo<0)
-                recorrer(item.hijos,item.codigo)
-            else
-                dicc[item.caracter]=item.codigo
-            end
-            contador+=1
-        end
-    end
+for i in 0..texto.size() - 1 do
+    arreglo2 << texto[i]
+end
+arreglo = arreglo2.uniq!
+frecuencias = Array.new(arreglo.size()){0}
 
-    dicc=Array.new
-    base = 2
-    print "cual es la cadena "
-    cadena = gets.chomp
-    caracteres = cadena.split("//")
-    unicos = caracteres.uniq
-    originales=[]
-    
-    unicos.each do |i|
-        originales<<Caracter.new(i,caracteres.count(i))
+for i in 0..texto.size() - 1 do
+    if( arreglo.include?(texto[i]) )
+        frecuencias[arreglo.index(texto[i])] = frecuencias[arreglo.index(texto[i])].to_i + 1
     end
-    ordenado = originales.sort { |a,b| b.probabilidad a.probabilidad }
-    puts "ordenados"
-    puts ordenado
-    
-    while(ordenado.size>base)
-        nuevo = Caracter.new
-        base.times do
-            nuevo.hijos<<ordenado.pop
-        end
-        nuevo.hijos.reverse!
-        nuevo.calcular
-        ordenado<<nuevo
-        ordenado.sort! { |a,b| b.probabilidad a.probabilidad }
-    end
-    
-    recorrer(ordenado,"hola")
-    codificado =""
-    caracteres.each do |i|
-        codificado<<dicc[i]
-    end
-    decodificar = codificado.split("//")
-    aux = ""
-    recuperado = ""
-    dicc_inv = dicc.invert
-    p dicc_inv
-    decodificar.each do |car|
-        aux<<car
-        if(dicc_inv.has_key?(aux))
-            recuperado<<dicc_inv[aux]
-            aux.replace("")
+end
+
+puts "ARREGLO"
+for i in 0..arreglo.size() - 1  do
+    print "[ #{arreglo[i]} ]"
+end
+puts
+puts "FRECUENCIAS"
+for i in 0..frecuencias.size() - 1  do
+    print "[ #{frecuencias[i]} ]"
+end
+puts
+puts "************************************"
+
+for i in 0..arreglo.size()- 1 do
+    for j in 0..arreglo.size()-2 do
+        if( frecuencias[j] < frecuencias[j+1] )
+            temp = frecuencias[j+1]
+            temp2 = arreglo[j+1]
+            frecuencias[j+1] = frecuencias[j]
+            arreglo[j+1] = arreglo[j]
+            frecuencias[j] = temp
+            arreglo[j] = temp2
         end
     end
 end
+puts
+puts "ARREGLO"
+for i in 0..arreglo.size() - 1  do
+    print "[ #{arreglo[i]} ]"
+end
+puts
+puts "FRECUENCIAS"
+for i in 0..frecuencias.size() - 1  do
+    print "[ #{frecuencias[i]} ]"
+end
+
+
+
+
+
+=begin
+
+=begin
+        vacio = Nodo.new()
+        nodo1 = Nodo.new()
+        nodo1 = crea2( arregloNodo[0],arregloNodo[1])
+        nodo2 = Nodo.new()
+        nodo2 = crea2( arregloNodo[2], arregloNodo[3])
+        padre1 = Nodo.new()
+        padre1 = crea2( nodo1, nodo2)
+        nodo3 = Nodo.new()
+        nodo3 = crea2( arregloNodo[4], vacio)
+        padre2 = crea2( padre1, nodo3)
+       # raizNueva2 = crea2( arregloNodo[0],arregloNodo[1])
+        @arregloBinario = Array.new()
+        puts
+        puts
+        recursivo(padre2)
+        puts
+        puts
+=end
+#=end

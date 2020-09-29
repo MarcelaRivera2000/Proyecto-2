@@ -1,4 +1,5 @@
 load "Nodo.rb"
+
 class TDA_Arbol
     attr_accessor :raiz
     def initialize()
@@ -56,75 +57,104 @@ class TDA_Arbol
     end
 
 
+
     def codificador_Huffman(texto)
-        array=Array.new
-        texto.delete!("\n")
-        for i in 0..texto.length
-            text=""
-            f=0
-            aux=texto[i]
-            for j in 0..texto.length-1
-                if(aux == texto[j] )
-                    f+=1
-                end
-            end
-            if (f!=0)
-                text<<"#{aux},#{f}"
-                array<<text    
+        arreglo2 = Array.new()
+        for i in 0..texto.size() - 1 do
+            arreglo2 << texto[i]
+        end
+        caracteres = arreglo2.uniq!
+        frecuencias = Array.new(caracteres.size()){0}
+        for i in 0..texto.size() - 1 do
+            if( caracteres.include?(texto[i]) )
+                frecuencias[caracteres.index(texto[i])] = frecuencias[caracteres.index(texto[i])].to_i + 1
             end
         end
-        for l in 0..array.size-1
-            cont=0
-            aux=array[l]
-            for k in 0 .. array.size
-                if aux == array[k] 
-                    cont+=1
-                    if cont>=2
-                        array.delete_at(k)
+        for i in 0..caracteres.size()- 1 do
+            for j in 0..caracteres.size()-2 do
+                if( frecuencias[j] > frecuencias[j+1] )
+                    temp = frecuencias[j+1]
+                    temp2 = caracteres[j+1]
+                    frecuencias[j+1] = frecuencias[j]
+                    caracteres[j+1] = caracteres[j]
+                    frecuencias[j] = temp
+                    caracteres[j] = temp2
+                end
+            end
+        end
+        arregloNodo = Array.new()
+        while caracteres[0] != nil
+            nodo1 = Nodo.new()
+            nodo1.dato = caracteres[0]
+            nodo1.frecuencia = frecuencias[0]
+            nodo2 = Nodo.new()
+            nodo2.dato = caracteres[1]
+            nodo2.frecuencia = frecuencias[1]
+            arregloNodo << crea2( nodo1, nodo2 )
+            frecuencias.delete_at(0)
+            frecuencias.delete_at(0) 
+            caracteres.delete_at(0)
+            caracteres.delete_at(0) 
+            for i in 0..arregloNodo.size()- 1 do
+                for j in 0..arregloNodo.size()-2 do
+                    if( arregloNodo[j].frecuencia > arregloNodo[j+1].frecuencia )
+                        temp = arregloNodo[j+1]
+                        arregloNodo[j+1] = arregloNodo[j]
+                        arregloNodo[j] = temp
                     end
                 end
-            end
+            end 
         end
-        array=ordenamiento(array)
-        nodo1=Nodo.new()
-        nodo2=Nodo.new()
-        array2=Array.new()
-        while (array[0]!=nil && array[1]!=nil)
-            n1=array[0].split(",")
-            n2=array[1].split(",")
-            nodo1.dato=n1[0]
-            nodo1.frecuencia=n1[1]
-            nodo2.dato=n2[0]
-            nodo2.frecuencia=n2[1]
-            array.delete_at(0)
-            array.delete_at(1)
-            aux=crea2(nodo1,nodo2)
-            array2<<aux
+        for i in 0..arregloNodo.size()-1 do
+            print "[#{arregloNodo[i].dato}]"
         end
-        if(array.size!=0)
-            n1=array[0].split(",")
-            nodo1.dato=n1[0]
-            nodo1.frecuencia=n1[1]
-            array.delete_at(0)
-            array2<<nodo1
+        #TERMINAR DE ARREGLAR ARREGLO BINARIO, Y AGRUPAR TODAS LAS RAICES 
+        #DEL ARREGLO NODO
+        @arregloBinario = Array.new()
+        raizNueva = Nodo.new()
+        raizNueva = crea2( arregloNodo[0],arregloNodo[1] )
+        puts
+        puts
+        recursivo(raizNueva)
+        puts
+        puts
+        puts "CODIFICACIÓN REALIZADA"
+        for i in 0..@arregloBinario.size() - 1 do
+            print "[#{@arregloBinario[i]}]"
         end
-        arbol=TDA_Arbol.new
-        while (array2.size!=1)
-            for bb in 0..array2.size-1
-                puts "#{bb} -> #{array2[bb].frecuencia}"
-            end
-            array2=ordenamientofrecu(array2)
-            aux=crea2(array2[0],array2[1])
-            array2<<aux
-            if(array2.size!=1)
-                arbol.raiz=array2[array2.size-1]
-            end
-            array2.delete_at(0)
-            array2.delete_at(1)
-        end
-        puts arbol.raiz.hijoIzquierdo.frecuencia
-
+        puts
+        puts
     end
+
+    def recursivo(root)
+        if (!root)
+            return
+        end
+        if ( !root.hijoDerecho && !root.hijoIzquierdo )
+            print "[#{root.dato}]"
+            return
+        end
+        if (root.hijoIzquierdo)
+            @arregloBinario.push(0)
+            recursivo(root.hijoIzquierdo);
+        end
+        if (root.hijoDerecho)
+            @arregloBinario.push(1)
+            recursivo(root.hijoDerecho);
+        end
+    end
+
+    def escribir(raiz)
+        puts "\nIngrese el nombre del archivo: "
+        archivo=gets
+        while (raiz!=nil )
+            File.write(archivo.delete!("\n"),"#{raiz.hijoIzquierdo.frecuencia},#{raiz.hijoIzquierdo.dato} ;#{raiz.hijoDerecho.frecuencia},#{raiz.hijoDerecho.dato}")
+        end
+        rescue Exception => exc   
+            puts "ERROR EN EL PROCESO!"
+    end
+
+    
 
     def ordenamientofrecu(array)
         for i in 1..array.size
@@ -152,20 +182,6 @@ class TDA_Arbol
             end
         end
         return array
-    end
-
-    def recursivo(nodo,text)
-        if(nodo.padre !=nil)
-            aux=nodo.padre
-            if(aux.hijoIzquierdo == nodo)
-                text<<"0"
-            else
-                text<<"1"
-            end
-            recursivo(aux,text)
-        else
-            return text
-        end
     end
 
     def Leer( archivoTxt )
@@ -233,6 +249,9 @@ class TDA_Arbol
         r.hijoIzquierdo=a1
         r.hijoDerecho=a2
         r.frecuencia=a1.frecuencia.to_i+a2.frecuencia.to_i
+        r.dato=a1.frecuencia.to_i+a2.frecuencia.to_i
+        a1.padre=r
+        a2.padre=r
         return r
     end
 end

@@ -4,7 +4,7 @@ load 'Arista.rb'
 class TDA_Grafo 
     def initialize
         @nVertices = 0
-       # @matriz_ = Array.new(){Array.new()}
+        # @matriz_ = Array.new(){Array.new()}
     end
 
 
@@ -44,10 +44,10 @@ class TDA_Grafo
             puts "ERROR EN EL PROCESO!"
     end
     
-    def Prim
-
+    def Prim (grafo)
+        
     end
-    
+
     def Kruskal
 
     end
