@@ -19,14 +19,8 @@ class TDA_Arbol
         if(nodo_r == nil)
             return 
         else
-<<<<<<< HEAD
             inOrder(nodo_r.hijoIzquierdo)
-            print "#{nodo_r.dato} " 
-            print "[ #{nodo_r.dato}]"
-=======
-            inOrder(nodo_r.hijoIzquierdo) 
-            print "[ #{nodo_r.dato} ]"
->>>>>>> 080d8dddb1648cdad65b10c9314656fd831db386
+            print "[ #{nodo_r.dato}] " 
             inOrder(nodo_r.hijoDerecho)
         end
         rescue Exception => exc   
@@ -43,7 +37,6 @@ class TDA_Arbol
             puts "ERROR EN EL PROCESO!"
     end
 
-<<<<<<< HEAD
     def codificador_Huffman(root)
         if (!root)
             return
@@ -58,10 +51,12 @@ class TDA_Arbol
         if (root.hijoDerecho)
             codificador_Huffman(root.hijoDerecho);
         end
+        rescue Exception => exc   
+            puts "ERROR EN EL PROCESO!"
     end
 
-=======
-    def codificador_Huffman(texto)
+
+    def codificador_HuffmanMarcela(texto)
         array=Array.new
         texto.delete!("\n")
         for i in 0..texto.length
@@ -174,7 +169,6 @@ class TDA_Arbol
         end
     end
 
->>>>>>> 080d8dddb1648cdad65b10c9314656fd831db386
     def descodificador_Huffman
     end
 
@@ -216,13 +210,9 @@ class TDA_Arbol
             self.raiz.dato = "0"
         else 
             puts "Archivo no existe" 
-<<<<<<< HEAD
         end  
         rescue Exception => exc   
             puts "ERROR EN EL PROCESO!" 
-=======
-        end
->>>>>>> 080d8dddb1648cdad65b10c9314656fd831db386
     end
 
     def crea1 (a1,i)

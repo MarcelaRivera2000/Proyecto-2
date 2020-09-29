@@ -1,6 +1,5 @@
 load 'Vertice.rb'
 load 'Arista.rb'
-load 'MatrizAbyacencia.rb'
 
 class TDA_Grafo 
     def initialize

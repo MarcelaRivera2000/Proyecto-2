@@ -57,8 +57,6 @@ class Caracter
         ordenado.sort! { |a,b| b.probabilidad a.probabilidad }
     end
     
-    
-    
     recorrer(ordenado,"hola")
     codificado =""
     caracteres.each do |i|
