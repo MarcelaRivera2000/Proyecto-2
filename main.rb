@@ -25,6 +25,12 @@ def Leer_Archivo
     return texto.delete!("\n")
 end
 
+def Ingresar_Texto
+    print "Ingrese el texto a codificar: "
+    texto = gets
+    return texto.delete!("\n")
+end
+
 def Menu_Arboles
     puts ""
     puts "***********MENU ARBOLES***********"
@@ -64,7 +70,7 @@ def Acciones_Arbol( opcion )
             when 2 then Arbol.preOrder(Arbol.raiz)
             when 3 then Arbol.inOrder(Arbol.raiz)
             when 4 then Arbol.postOrder(Arbol.raiz)
-            when 5 then Arbol.codificador_Huffman()
+            when 5 then Arbol.codificador_Huffman(Arbol.raiz)
             when 6 then Arbol.decodificador_Huffman()
         end
         opcion = Menu_Arboles()
@@ -75,7 +81,14 @@ end
 def Acciones_Grafos( opcion )
     loop do
         case opcion
-            when 1 then Grafo.Leer( Leer_Archivo() )
+            when 1 then 
+                puts "************"
+                puts "*1. Lista  *"
+                puts "*2. Matriz *"
+                puts "************"
+                print "Ingrese una opcion: "
+                op = gets.chomp.to_i
+                Grafo.Leer( Leer_Archivo() )
             when 2 then Grafo.Prim()
             when 3 then Grafo.Kruskal()
             when 4 then Grafo.Floyd()

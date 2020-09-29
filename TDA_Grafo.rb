@@ -5,22 +5,9 @@ load 'MatrizAbyacencia.rb'
 class TDA_Grafo 
     def initialize
         @nVertices = 0
-        @matriz_ = Array.new(){Array.new()}
+       # @matriz_ = Array.new(){Array.new()}
     end
 
-    def Matriz_Adyacencia( i, j, peso, nVertices )
-        matriz = Array.new(nVertices.to_i){ Array.new(nVertices.to_i) }
-        if( i.to_i == -1 && j.to_i == -1 ) then matriz[i.to_i][j.to_i] = "INFINITO" 
-            else
-                matriz[i.to_i][j.to_i] = peso.to_i
-        end
-        for fila in(0..nVertices.to_i)
-            for columna in(0..nVertices.to_i)
-                print "[#{matriz[fila][columna]}]"
-            end
-            puts ""
-        end
-    end 
 
     def Leer( archivoTxt )
         archivo = File.read( archivoTxt )
@@ -41,13 +28,21 @@ class TDA_Grafo
             datos = elemento.split(";")
             datos.each do |elementos|
                 parametros = elementos.split(",")
-                @matriz[i][j] = parametros[1].chomp("\n")
+                if( parametros[1].to_i == 0 )
+                    parametros[1] = 999
+                end
+                if( i == j )
+                    parametros[1] = 0
+                end
+                @matriz[i][j] = parametros[1].to_i
                 j += 1
             end
             j = 0
             i += 1
         end  
-        matrix(@matriz, @nVertices)  
+        matrix(@matriz, @nVertices)
+        rescue Exception => exc   
+            puts "ERROR EN EL PROCESO!"
     end
     
     def Prim
@@ -59,7 +54,33 @@ class TDA_Grafo
     end
     
     def Floyd
-    
+        anterior = ik = ij = actual = minimo = 0
+        for k in 0..@nVertices.to_i - 1 do
+            for i in 0..@nVertices.to_i - 1 do
+                for j in 0..@nVertices.to_i - 1 do
+                    if( i.to_i != j.to_i && k.to_i != i.to_i && k.to_i != j.to_i )
+                        anterior = (@matriz[i][j]).to_i
+                        ik = (@matriz[i][k]).to_i
+                        kj = (@matriz[k][j]).to_i
+                        if( ik.to_i == 999 || kj.to_i == 999 )
+                            actual = 999
+                        else 
+                            actual = ik.to_i + kj.to_i
+                        end
+                        if( actual != 999 && ( actual.to_i < anterior.to_i || anterior == 999))
+                            minimo = actual
+                        else
+                            minimo = anterior
+                        end
+                        if( i == j ) then minimo = 0 end
+                        @matriz[i][j] = minimo.to_i
+                    end
+                end
+            end
+        end
+        matrix( @matriz, @nVertices )
+        rescue Exception => exc   
+            puts "ERROR EN EL PROCESO!"
     end
 
     def usarParametros( elementos )
@@ -73,6 +94,8 @@ class TDA_Grafo
             end
             puts ""
         end
+        rescue Exception => exc   
+            puts "ERROR EN EL PROCESO!"
     end
 
 end

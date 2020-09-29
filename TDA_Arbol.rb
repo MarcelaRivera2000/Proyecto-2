@@ -11,6 +11,8 @@ class TDA_Arbol
             preOrder(raiz.hijoIzquierdo)
             preOrder(raiz.hijoDerecho)
         end
+        rescue Exception => exc   
+            puts "ERROR EN EL PROCESO!"
     end
 
     def inOrder(nodo_r)
@@ -19,9 +21,11 @@ class TDA_Arbol
         else
             inOrder(nodo_r.hijoIzquierdo)
             print "#{nodo_r.dato} " 
-            print "[ #{nodo_r.dato} ]"
+            print "[ #{nodo_r.dato}]"
             inOrder(nodo_r.hijoDerecho)
         end
+        rescue Exception => exc   
+            puts "ERROR EN EL PROCESO!"
     end
 
     def postOrder(raiz)
@@ -30,10 +34,26 @@ class TDA_Arbol
             postOrder(raiz.hijoDerecho)
             print "[ #{raiz.dato} ]"
         end
+        rescue Exception => exc   
+            puts "ERROR EN EL PROCESO!"
     end
 
-    def codificador_Huffman(archivoTxt)
+    def codificador_Huffman(root)
+        if (!root)
+            return
+        end  
+        if ( !root.hijoDerecho && !root.hijoIzquierdo )
+            print "[#{root.dato.to_i}]"
+            return
+        end
+        if (root.hijoIzquierdo)
+            codificador_Huffman(root.hijoIzquierdo);
+        end
+        if (root.hijoDerecho)
+            codificador_Huffman(root.hijoDerecho);
+        end
     end
+
     def descodificador_Huffman
     end
 
@@ -76,7 +96,9 @@ class TDA_Arbol
             self.raiz.dato = "0"
         else 
             puts "Archivo no existe" 
-        end   
+        end  
+        rescue Exception => exc   
+            puts "ERROR EN EL PROCESO!" 
     end
 
     def crea1 (a1,i)
@@ -92,6 +114,8 @@ class TDA_Arbol
             self.raiz.padre = a1.hijoIzquierdo
         end
         a1
+        rescue Exception => exc   
+            puts "ERROR EN EL PROCESO!"
     end
 
 end

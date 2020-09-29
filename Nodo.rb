@@ -1,6 +1,5 @@
 class Nodo
     attr_accessor :dato , :padre , :hijoIzquierdo , :hijoDerecho
-    def initialize()
-        
+    def initialize() 
     end 
 end
