@@ -57,6 +57,8 @@ class TDA_Arbol
     end
 
     def codificador_Huffman(texto)
+        bariable=texto
+        cant_nodos=0
         arreglo2 = Array.new()
         for i in 0..texto.size() - 1 do
             arreglo2 << texto[i]
@@ -68,6 +70,7 @@ class TDA_Arbol
                 frecuencias[caracteres.index(texto[i])] = frecuencias[caracteres.index(texto[i])].to_i + 1
             end
         end
+        cant_nodos+=caracteres.size()-1
         for i in 0..caracteres.size()- 1 do
             for j in 0..caracteres.size()-2 do
                 if( frecuencias[j] > frecuencias[j+1] )
@@ -85,10 +88,6 @@ class TDA_Arbol
         while caracteres[0] != nil
             nodo1 = Nodo.new()
             nodo1.dato = "#{caracteres[0]}"
-            for i in 0..caracteres.size()-1 do
-                print "<[#{caracteres[i]}]>"
-            end
-            print "\n"
             nodo1.frecuencia = frecuencias[0]
             nodo2 = Nodo.new()
             nodo2.dato = caracteres[1]
@@ -106,15 +105,13 @@ class TDA_Arbol
                         arregloNodo[j] = temp
                     end
                 end
-            end 
-            for i in 0..arregloNodo.size()-1 do
-                print " -[#{arregloNodo[i].dato}]- "
             end
+            cant_nodos+=1
         end
         loop do
             if( arregloNodo[0]!=nil && arregloNodo[1]!=nil ) then break end
         end 
-        while arregloNodo[0]!=nil && arregloNodo[1]!=nil
+        while arregloNodo[1]!=nil 
             arregloNodo<<crea2(arregloNodo[0],arregloNodo[1])
             arregloNodo.delete_at(0)
             arregloNodo.delete_at(0)
@@ -128,18 +125,86 @@ class TDA_Arbol
                 end
             end
             print "\n"
-            for i in 0..arregloNodo.size()-1 do
-                print " >[#{arregloNodo[i].dato}]< "
+            if (arregloNodo[1]==nil)
+                @arregloHojas=Array.new()
+                @arregloBinario=Array.new()
+                raizNueva=Nodo.new()
+                raizNueva=arregloNodo[arregloNodo.size-1]
+                hojas(raizNueva)
+                for i in 0..@arregloHojas.size() - 1 do
+                    print " [#{@arregloHojas[i]}] "
+                end
+                puts "\n"
+                for i in 0..@arregloBinario.size() - 1 do
+                    print " [#{@arregloBinario[i]}] "
+                end
+                x=""
+                for n in 0.. bariable.length-1
+                    for i in 0..@arregloHojas.size() - 1 do
+                        if (bariable[n] == @arregloHojas[i])
+                            x<<"#{@arregloBinario[i]}"
+                            
+                            break
+                        end
+                    end
+                end
+                
+                puts "\nCODIFICADO: #{x} "
+                puts "\nIngrese el nombre del archivo para guardar el codigo: "
+                archivo=gets
+                File.write(archivo.delete!("\n")," #{x}")
+                puts "\nIngrese el nombre del archivo para guardar la matriz: "
+                archivo=gets
+                escribir(raizNueva,archivo,cant_nodos)
             end
         end
-        raizNueva=Nodo.new()
-        raizNueva=arregloNodo[arregloNodo.size-1]
-        recursivo(raizNueva)
         rescue Exception => exc   
-        puts "ERROR EN EL PROCESO!"
-        #TERMINAR DE ARREGLAR ARREGLO BINARIO, Y AGRUPAR TODAS LAS RAICES 
-        #DEL ARREGLO NODO
+        puts "\nERROR EN EL PROCESO!"
     end
+
+
+
+    def escribir(raiz,archivo,cant_nodos)
+        if raiz!=nil 
+            File.write(archivo.delete!("\n"),"#{cant_nodos}\n#{raiz.hijoIzquierdo.frecuencia},#{raiz.hijoIzquierdo.dato} ;#{raiz.hijoDerecho.frecuencia},#{raiz.hijoDerecho.dato}")
+            escribir(raiz.hijoIzquierdo)
+            escribir(raiz.hijoDerecho)
+        end
+        rescue Exception => exc   
+            puts "ERROR EN EL PROCESO!"
+    end
+
+    def hojas(root)
+        if (!root)
+            return
+        end
+        if ( !root.hijoDerecho && !root.hijoIzquierdo )
+            @arregloHojas.push(root.dato)
+            texto=binario(root,"")
+            @arregloBinario.push(texto.reverse!)
+            return
+        end
+        if (root.hijoIzquierdo !=nil)
+            hojas(root.hijoIzquierdo)
+        end
+        if (root.hijoDerecho !=nil)
+            hojas(root.hijoDerecho)
+        end
+    end
+    def binario(nodo,text)
+        if(nodo.padre!=nil)
+            aux=nodo.padre
+            if(aux.hijoIzquierdo==nodo)
+                text<<"0"
+            elsif (aux.hijoDerecho==nodo)
+                text<<"1"
+            end
+            binario(aux,text)
+        else
+            return text
+        end
+    end
+
 
     def descodificador_Huffman( binarioTxt, arbolTxt )
         binario = File.read( binarioTxt )
@@ -246,11 +311,11 @@ class TDA_Arbol
         end
     end
 
-    def escribir(raiz)
-        puts "\nIngrese el nombre del archivo: "
-        archivo=gets
-        while (raiz!=nil )
-            File.write(archivo.delete!("\n"),"#{raiz.hijoIzquierdo.frecuencia},#{raiz.hijoIzquierdo.dato} ;#{raiz.hijoDerecho.frecuencia},#{raiz.hijoDerecho.dato}")
+    def escribir(raiz,archivo,cant_nodos)
+        if raiz!=nil 
+            File.write(archivo.delete!("\n"),"#{cant_nodos}\n#{raiz.hijoIzquierdo.frecuencia},#{raiz.hijoIzquierdo.dato} ;#{raiz.hijoDerecho.frecuencia},#{raiz.hijoDerecho.dato}")
+            escribir(raiz.hijoIzquierdo)
+            escribir(raiz.hijoDerecho)
         end
         rescue Exception => exc   
             puts "ERROR EN EL PROCESO!"
