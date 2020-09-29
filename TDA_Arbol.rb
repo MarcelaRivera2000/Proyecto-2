@@ -32,7 +32,7 @@ class TDA_Arbol
     end
 
     def codificador_Huffman(texto)
-        array=Array.new
+        array=Array.new()
         texto.delete!("\n")
         for i in 0..texto.length
             text=""
@@ -47,7 +47,6 @@ class TDA_Arbol
                 text<<"#{aux},#{f}"
                 array<<text    
             end
-            
         end
         for l in 0..array.size-1
             cont=0
@@ -69,8 +68,8 @@ class TDA_Arbol
             n1=array[0].split(",")
             n2=array[1].split(",")
             nodo1.dato=n1[0]
-            nodo1.frecuencia=n1[1]
             nodo2.dato=n2[0]
+            nodo1.frecuencia=n1[1]
             nodo2.frecuencia=n2[1]
             array.delete_at(0)
             array.delete_at(1)
@@ -81,14 +80,10 @@ class TDA_Arbol
             n1=array[0].split(",")
             nodo1.dato=n1[0]
             nodo1.frecuencia=n1[1]
-            array.delete_at(0)
             array2<<nodo1
         end
         arbol=TDA_Arbol.new
         while (array2.size!=1)
-            for bb in 0..array2.size-1
-                puts "#{bb} -> #{array2[bb].frecuencia}"
-            end
             array2=ordenamientofrecu(array2)
             aux=crea2(array2[0],array2[1])
             array2<<aux
@@ -98,8 +93,33 @@ class TDA_Arbol
             array2.delete_at(0)
             array2.delete_at(1)
         end
-        puts arbol.raiz.hijoIzquierdo.frecuencia
+        postOrder(arbol.raiz)
+        recursivo(raiz)
+        escribir(arbol.raiz)
+    end
 
+    def escribir(raiz)
+        puts "\nIngrese el nombre del archivo: "
+        archivo=gets
+        while (raiz!=nil )
+            File.write(archivo.delete!("\n"),"#{raiz.hijoIzquierdo.frecuencia},#{raiz.hijoIzquierdo.dato} ;#{raiz.hijoDerecho.frecuencia},#{raiz.hijoDerecho.dato}")
+        end
+    end
+
+    def recursivo(root)
+        if (!root)
+            return
+        end
+        if ( !root.hijoDerecho && !root.hijoIzquierdo )
+            print "[#{root.dato.to_i}]"
+            return
+        end
+        if (root.hijoIzquierdo)
+            codificador_Huffman(root.hijoIzquierdo);
+        end
+        if (root.hijoDerecho)
+            codificador_Huffman(root.hijoDerecho);
+        end
     end
 
     def ordenamientofrecu(array)
@@ -128,20 +148,6 @@ class TDA_Arbol
             end
         end
         return array
-    end
-
-    def recursivo(nodo,text)
-        if(nodo.padre !=nil)
-            aux=nodo.padre
-            if(aux.hijoIzquierdo == nodo)
-                text<<"0"
-            else
-                text<<"1"
-            end
-            recursivo(aux,text)
-        else
-            return text
-        end
     end
 
     def descodificador_Huffman
@@ -208,6 +214,9 @@ class TDA_Arbol
         r.hijoIzquierdo=a1
         r.hijoDerecho=a2
         r.frecuencia=a1.frecuencia.to_i+a2.frecuencia.to_i
+        r.dato=a1.frecuencia.to_i+a2.frecuencia.to_i
+        a1.padre=r
+        a2.padre=r
         return r
     end
 end

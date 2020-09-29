@@ -1,6 +1,5 @@
 load 'Vertice.rb'
 load 'Arista.rb'
-load 'MatrizAbyacencia.rb'
 
 class TDA_Grafo 
     def initialize
@@ -50,10 +49,10 @@ class TDA_Grafo
         matrix(@matriz, @nVertices)  
     end
     
-    def Prim
-
+    def Prim (grafo)
+        
     end
-    
+
     def Kruskal
 
     end
