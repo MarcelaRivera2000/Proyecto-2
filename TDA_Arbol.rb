@@ -56,8 +56,6 @@ class TDA_Arbol
             puts "ERROR EN EL PROCESO!"
     end
 
-
-
     def codificador_Huffman(texto)
         arreglo2 = Array.new()
         for i in 0..texto.size() - 1 do
@@ -83,9 +81,14 @@ class TDA_Arbol
             end
         end
         arregloNodo = Array.new()
+        bool=true
         while caracteres[0] != nil
             nodo1 = Nodo.new()
-            nodo1.dato = caracteres[0]
+            nodo1.dato = "#{caracteres[0]}"
+            for i in 0..caracteres.size()-1 do
+                print "<[#{caracteres[i]}]>"
+            end
+            print "\n"
             nodo1.frecuencia = frecuencias[0]
             nodo2 = Nodo.new()
             nodo2.dato = caracteres[1]
@@ -104,26 +107,38 @@ class TDA_Arbol
                     end
                 end
             end 
+            for i in 0..arregloNodo.size()-1 do
+                print " -[#{arregloNodo[i].dato}]- "
+            end
         end
-        for i in 0..arregloNodo.size()-1 do
-            print "[#{arregloNodo[i].dato}]"
+        loop do
+            if( arregloNodo[0]!=nil && arregloNodo[1]!=nil ) then break end
+        end 
+        while arregloNodo[0]!=nil && arregloNodo[1]!=nil
+            arregloNodo<<crea2(arregloNodo[0],arregloNodo[1])
+            arregloNodo.delete_at(0)
+            arregloNodo.delete_at(0)
+            for i in 0..arregloNodo.size()- 1 do
+                for j in 0..arregloNodo.size()-2 do
+                    if( arregloNodo[j].frecuencia > arregloNodo[j+1].frecuencia )
+                        temp = arregloNodo[j+1]
+                        arregloNodo[j+1] = arregloNodo[j]
+                        arregloNodo[j] = temp
+                    end
+                end
+            end
+            print "\n"
+            for i in 0..arregloNodo.size()-1 do
+                print " >[#{arregloNodo[i].dato}]< "
+            end
         end
+        raizNueva=Nodo.new()
+        raizNueva=arregloNodo[arregloNodo.size-1]
+        recursivo(raizNueva)
+        rescue Exception => exc   
+        puts "ERROR EN EL PROCESO!"
         #TERMINAR DE ARREGLAR ARREGLO BINARIO, Y AGRUPAR TODAS LAS RAICES 
         #DEL ARREGLO NODO
-        @arregloBinario = Array.new()
-        raizNueva = Nodo.new()
-        raizNueva = crea2( arregloNodo[0],arregloNodo[1] )
-        puts
-        puts
-        recursivo(raizNueva)
-        puts
-        puts
-        puts "CODIFICACIÓN REALIZADA"
-        for i in 0..@arregloBinario.size() - 1 do
-            print "[#{@arregloBinario[i]}]"
-        end
-        puts
-        puts
     end
 
     def recursivo(root)
@@ -131,7 +146,7 @@ class TDA_Arbol
             return
         end
         if ( !root.hijoDerecho && !root.hijoIzquierdo )
-            print "[#{root.dato}]"
+            print " #[#{root.dato}]# "
             return
         end
         if (root.hijoIzquierdo)
@@ -152,36 +167,6 @@ class TDA_Arbol
         end
         rescue Exception => exc   
             puts "ERROR EN EL PROCESO!"
-    end
-
-    
-
-    def ordenamientofrecu(array)
-        for i in 1..array.size
-            for j in 0..array.size-2
-                if(array[j].frecuencia.to_i > array[j+1].frecuencia.to_i)
-                    aux=array[j]
-                    array[j]=array[j+1]
-                    array[j+1]=aux
-                end
-            end
-        end
-        return array
-    end
-
-    def ordenamiento(array)
-        for i in 1..array.size
-            for j in 0..array.size-2
-                num=array[j].split(",")
-                num2=array[j+1].split(",")
-                if(num[1].to_i > num2[1].to_i)
-                    aux=array[j]
-                    array[j]=array[j+1]
-                    array[j+1]=aux
-                end
-            end
-        end
-        return array
     end
 
     def Leer( archivoTxt )
