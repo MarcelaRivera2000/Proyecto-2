@@ -226,8 +226,8 @@ class TDA_Arbol
         else 
             puts "Archivo no existe" 
         end  
-        #rescue Exception => exc   
-        #    puts "ERROR EN EL PROCESO!" 
+        rescue Exception => exc   
+            puts "ERROR EN EL PROCESO!" 
     end
 
     def recursivo(root)

@@ -7,7 +7,29 @@ class TDA_Grafo
         @nVertices = 0
         # @matriz_ = Array.new(){Array.new()}
     end
-
+    
+    def LeerLista(texto)
+        archivo = File.read( texto )
+        lines = archivo.split("\n")
+        exiten = lines[0].to_i
+        vertic = []
+        i = 1
+        while i < lines.length
+            aux = lines[i].split(";")
+            j = 0
+            temp = Vertice.new(i)
+            while j < aux.length
+                r_arista = aux[j].split(",")
+                if(r_arista[0].to_i != -1)
+                    temp.insertarArista(Arista.new(r_arista[0].to_i , r_arista[1].to_i,i))
+                end
+                j+=1
+            end
+            vertic[vertic.length] = temp
+            i+=1
+        end 
+        self.vertices = vertic
+    end
 
     def Leer( archivoTxt )
         archivo = File.read( archivoTxt )
