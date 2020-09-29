@@ -155,23 +155,23 @@ class TDA_Arbol
                 File.write(archivo.delete!("\n")," #{x}")
                 puts "\nIngrese el nombre del archivo para guardar la matriz: "
                 archivo=gets
-                escribir(raizNueva,archivo,cant_nodos)
+                @str = "#{cant_nodos}\n"
+                escribir(raizNueva)
+                File.write(archivo.delete!("\n"),@str)
             end
         end
         rescue Exception => exc   
         puts "\nERROR EN EL PROCESO!"
     end
 
-
-
-    def escribir(raiz,archivo,cant_nodos)
+    def escribir(raiz)
         if raiz!=nil 
-            File.write(archivo.delete!("\n"),"#{cant_nodos}\n#{raiz.hijoIzquierdo.frecuencia},#{raiz.hijoIzquierdo.dato} ;#{raiz.hijoDerecho.frecuencia},#{raiz.hijoDerecho.dato}")
+            @str += "#{raiz.hijoIzquierdo.frecuencia},#{raiz.hijoIzquierdo.dato};#{raiz.hijoDerecho.frecuencia},#{raiz.hijoDerecho.dato}\n"
             escribir(raiz.hijoIzquierdo)
             escribir(raiz.hijoDerecho)
         end
-        rescue Exception => exc   
-            puts "ERROR EN EL PROCESO!"
+        #rescue Exception => exc   
+         #   puts "ERROR EN EL PROCESO!"
     end
 
     def hojas(root)
@@ -300,7 +300,11 @@ class TDA_Arbol
             return
         end
         if ( !root.hijoDerecho && !root.hijoIzquierdo )
-            @arregloHojas << root.dato
+            aux = root.dato.split(",")
+            if( aux[1] == "1" || aux[1] == "2" || aux[1] == "3" || aux[1] == "4" || aux[1] == "5" || aux[1] == "6" || aux[1] == "7" || aux[1] == "8" || aux[1] == "9" || aux[1] == "0" )
+            else
+                @arregloHojas << root.dato
+            end
             return
         end
         if (root.hijoIzquierdo)
@@ -311,15 +315,7 @@ class TDA_Arbol
         end
     end
 
-    def escribir(raiz,archivo,cant_nodos)
-        if raiz!=nil 
-            File.write(archivo.delete!("\n"),"#{cant_nodos}\n#{raiz.hijoIzquierdo.frecuencia},#{raiz.hijoIzquierdo.dato} ;#{raiz.hijoDerecho.frecuencia},#{raiz.hijoDerecho.dato}")
-            escribir(raiz.hijoIzquierdo)
-            escribir(raiz.hijoDerecho)
-        end
-        rescue Exception => exc   
-            puts "ERROR EN EL PROCESO!"
-    end
+    
 
     def Leer( archivoTxt )
         if(File.file?(archivoTxt))

@@ -29,6 +29,8 @@ class TDA_Grafo
             i+=1
         end 
         self.vertices = vertic
+        rescue Exception => exc   
+            puts "ERROR EN EL PROCESO!"
     end
 
     def Leer( archivoTxt )
