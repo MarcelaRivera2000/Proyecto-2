@@ -25,9 +25,15 @@ def Leer_Archivo
     return texto.delete!("\n")
 end
 
+<<<<<<< HEAD
 def Ingresar_Texto
     print "Ingrese el texto a codificar: "
     texto = gets
+=======
+def Codificador
+    print "Ingrese un texto: "
+    texto=gets
+>>>>>>> 080d8dddb1648cdad65b10c9314656fd831db386
     return texto.delete!("\n")
 end
 
@@ -62,7 +68,7 @@ def Menu_Grafos
     puts "\n\n"
     return opcion
 end
-
+#PruebaHuffman.txt
 def Acciones_Arbol( opcion )
     loop do
         case opcion
@@ -70,8 +76,13 @@ def Acciones_Arbol( opcion )
             when 2 then Arbol.preOrder(Arbol.raiz)
             when 3 then Arbol.inOrder(Arbol.raiz)
             when 4 then Arbol.postOrder(Arbol.raiz)
+<<<<<<< HEAD
             when 5 then Arbol.codificador_Huffman(Arbol.raiz)
             when 6 then Arbol.decodificador_Huffman()
+=======
+            when 5 then Arbol.codificador_Huffman(Codificador())
+            when 6 then Arbol.descodificador_Huffman()
+>>>>>>> 080d8dddb1648cdad65b10c9314656fd831db386
         end
         opcion = Menu_Arboles()
         if( opcion == 7 ) then break end
