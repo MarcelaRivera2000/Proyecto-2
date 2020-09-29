@@ -25,9 +25,14 @@ def Leer_Archivo
     return texto.delete!("\n")
 end
 
+def Ingresar_Texto
+    print "Ingrese el texto a codificar: "
+    texto = gets
+end
+
 def Codificador
     print "Ingrese un texto: "
-    texto=gets
+    texto = gets
     return texto.delete!("\n")
 end
 
@@ -62,7 +67,8 @@ def Menu_Grafos
     puts "\n\n"
     return opcion
 end
-#PruebaHuffman.txt
+
+
 def Acciones_Arbol( opcion )
     loop do
         case opcion
@@ -81,7 +87,14 @@ end
 def Acciones_Grafos( opcion )
     loop do
         case opcion
-            when 1 then Grafo.Leer( Leer_Archivo() )
+            when 1 then 
+                puts "************"
+                puts "*1. Lista  *"
+                puts "*2. Matriz *"
+                puts "************"
+                print "Ingrese una opcion: "
+                op = gets.chomp.to_i
+                Grafo.Leer( Leer_Archivo() )
             when 2 then Grafo.Prim()
             when 3 then Grafo.Kruskal()
             when 4 then Grafo.Floyd()
