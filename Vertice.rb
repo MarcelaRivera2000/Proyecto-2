@@ -1,12 +1,13 @@
 load 'Arista.rb'
 
 class Vertice
-    @lista = Array.new
-    def initialize(n_dato)
-        @dato=n_dato
+    attr_accessor :lista ,:n_dato
+    def initialize(n_dato=0)
+        self.n_dato=n_dato
+        self.lista = []
     end
     def insertarArista( arista )
-        @lista << arista
+        lista[lista.length] = arista
     end
     def getAristas
         return @lista

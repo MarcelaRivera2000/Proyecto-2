@@ -77,7 +77,7 @@ def Acciones_Arbol( opcion )
             when 3 then Arbol.inOrder(Arbol.raiz)
             when 4 then Arbol.postOrder(Arbol.raiz)
             when 5 then Arbol.codificador_Huffman(Codificador())
-            when 6 then Arbol.descodificador_Huffman()
+            when 6 then Arbol.descodificador_Huffman( Leer_Archivo(), Leer_Archivo() )
         end
         opcion = Menu_Arboles()
         if( opcion == 7 ) then break end
@@ -94,7 +94,9 @@ def Acciones_Grafos( opcion )
                 puts "************"
                 print "Ingrese una opcion: "
                 op = gets.chomp.to_i
-                Grafo.Leer( Leer_Archivo() )
+                if( op == 1 )then Grafo.LeerLista( Leer_Archivo() )
+                elsif( op == 2 ) then Grafo.Leer( Leer_Archivo() )
+                end   
             when 2 then Grafo.Prim()
             when 3 then Grafo.Kruskal()
             when 4 then Grafo.Floyd()

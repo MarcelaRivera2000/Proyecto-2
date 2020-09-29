@@ -1,17 +1,10 @@
 class Arista
     attr_accessor :v_origen, :v_destino, :v_peso
-    def initialize()
-        @v_origen = 0
-        @v_destino = 0
-        @v_peso = 0
+    def initialize(v_destino,v_peso,v_origen)
+        self.v_origen = v_origen
+        self.v_destino = v_destino
+        self.v_peso = v_peso
     end 
-
-    def initialize(origen,destino,peso)
-        @v_origen = origen
-        @v_destino = destino
-        @v_peso = peso
-    end
-
     def toString
         return "[Origen:  #{@v_origen} ][ Destino: #{@v_destino} ][ Peso: #{@v_peso} ] "
     end

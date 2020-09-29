@@ -141,20 +141,107 @@ class TDA_Arbol
         #DEL ARREGLO NODO
     end
 
+    def descodificador_Huffman( binarioTxt, arbolTxt )
+        binario = File.read( binarioTxt )
+        lines = binario.split("\n")
+        strBinario = lines[0]
+        LeerCodificado( arbolTxt )
+        @arregloHojas = Array.new
+        recursivo( raiz )
+        puts "ARREGLO"
+        for i in 0..@arregloHojas.size() - 1  do
+            print "[#{@arregloHojas[i]}]"
+        end
+        valores = Array.new()
+        for i in 0..@arregloHojas.size() - 1 do
+            valores2 = @arregloHojas[i].split(",")
+            str = ""
+            for j in 0..valores2[0].to_i - 1 do
+                str += valores2[1]
+            end
+            valores << str
+        end
+        puts ""
+        puts "ARREGLO DE VALORES"
+        frecuenciaStr = Array.new()
+        for i in 0..valores.size() - 1  do
+            print "[#{valores[i]}]"
+            frecuenciaStr << valores[i].size()
+        end
+        for i in 0..frecuenciaStr.size() -1 do
+            for j in 0..frecuenciaStr.size() -2 do
+                if( frecuenciaStr[j] > frecuenciaStr[j+1] )
+                    temp = frecuenciaStr[j+1]
+                    temp2 = valores[j+1]
+                    frecuenciaStr[j+1] = frecuenciaStr[j]
+                    valores[j+1] = valores[j]
+                    frecuenciaStr[j] = temp 
+                    valores[j] = temp2
+                end
+            end
+        end
+        puts
+        puts "ARREGLO DE VALORES ORDENADO"
+        for i in 0..valores.size() - 1  do
+            print "[#{valores[i]}]"
+        end
+    end
+
+    def LeerCodificado( archivoTxt )
+        if(File.file?(archivoTxt))
+            archivo = File.read( archivoTxt )
+            lines = archivo.split("\n")
+            numero_hijos = lines[0].to_i
+            i = lines.length-1;
+            nodos = []
+            while (i>0)
+                if(lines[i] != "")
+                    hijos = lines[i].split(";")
+                    nodo_nuevo = Nodo.new
+                    n_derecho = Nodo.new
+                    n_izquierdo = Nodo.new
+                    n_derecho.dato = hijos[1]
+                    n_izquierdo.dato = hijos[0]
+                    nodo_nuevo.hijoDerecho = n_derecho
+                    nodo_nuevo.hijoIzquierdo = n_izquierdo
+                    nodos[nodos.length] = nodo_nuevo
+                end
+                i-=1
+            end
+            i = 0 
+            control = 1 
+            if lines.length%2 == 0
+                control = 0
+            end
+            while (i < nodos.length)
+                self.raiz = crea1(nodos[i],control)
+                if control == 1 
+                    control = 0 
+                else 
+                    control = 1
+                end
+                i+=1
+            end
+            self.raiz.dato = "0"
+        else 
+            puts "Archivo no existe" 
+        end  
+        #rescue Exception => exc   
+        #    puts "ERROR EN EL PROCESO!" 
+    end
+
     def recursivo(root)
         if (!root)
             return
         end
         if ( !root.hijoDerecho && !root.hijoIzquierdo )
-            print " #[#{root.dato}]# "
+            @arregloHojas << root.dato
             return
         end
         if (root.hijoIzquierdo)
-            @arregloBinario.push(0)
             recursivo(root.hijoIzquierdo);
         end
         if (root.hijoDerecho)
-            @arregloBinario.push(1)
             recursivo(root.hijoDerecho);
         end
     end
