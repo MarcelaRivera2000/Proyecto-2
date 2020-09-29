@@ -53,14 +53,15 @@ class TDA_Grafo
     end
     
     def Floyd
+        matriz2 = @matriz
         anterior = ik = ij = actual = minimo = 0
         for k in 0..@nVertices.to_i - 1 do
             for i in 0..@nVertices.to_i - 1 do
                 for j in 0..@nVertices.to_i - 1 do
                     if( i.to_i != j.to_i && k.to_i != i.to_i && k.to_i != j.to_i )
-                        anterior = (@matriz[i][j]).to_i
-                        ik = (@matriz[i][k]).to_i
-                        kj = (@matriz[k][j]).to_i
+                        anterior = (matriz2[i][j]).to_i
+                        ik = (matriz2[i][k]).to_i
+                        kj = (matriz2[k][j]).to_i
                         if( ik.to_i == 999 || kj.to_i == 999 )
                             actual = 999
                         else 
@@ -72,12 +73,12 @@ class TDA_Grafo
                             minimo = anterior
                         end
                         if( i == j ) then minimo = 0 end
-                        @matriz[i][j] = minimo.to_i
+                        matriz2[i][j] = minimo.to_i
                     end
                 end
             end
         end
-        matrix( @matriz, @nVertices )
+        matrix( matriz2, @nVertices )
         rescue Exception => exc   
             puts "ERROR EN EL PROCESO!"
     end

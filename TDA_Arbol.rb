@@ -20,7 +20,7 @@ class TDA_Arbol
             return 
         else
             inOrder(nodo_r.hijoIzquierdo)
-            print "[ #{nodo_r.dato}] " 
+            print "[ #{nodo_r.dato} ]" 
             inOrder(nodo_r.hijoDerecho)
         end
         rescue Exception => exc   
@@ -37,7 +37,7 @@ class TDA_Arbol
             puts "ERROR EN EL PROCESO!"
     end
 
-    def codificador_Huffman(root)
+    def codificador_HuffmanMarcela(root)
         if (!root)
             return
         end  
@@ -56,7 +56,7 @@ class TDA_Arbol
     end
 
 
-    def codificador_HuffmanMarcela(texto)
+    def codificador_Huffman(texto)
         array=Array.new
         texto.delete!("\n")
         for i in 0..texto.length
@@ -72,7 +72,6 @@ class TDA_Arbol
                 text<<"#{aux},#{f}"
                 array<<text    
             end
-            
         end
         for l in 0..array.size-1
             cont=0
@@ -167,9 +166,6 @@ class TDA_Arbol
         else
             return text
         end
-    end
-
-    def descodificador_Huffman
     end
 
     def Leer( archivoTxt )
