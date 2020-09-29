@@ -49,7 +49,100 @@ class TDA_Grafo
     end
 
     def Kruskal
+        temp_aristas = []
+        conjunto_solution = []
+        for i in(0..vertices.length-1)
+            temp_aristas = temp_aristas+vertices[i].lista
+        end
+        arista_temporal = nil
+        
+        for i in(0..temp_aristas.length-1)
+            for j in(0..temp_aristas.length-1)
+                if(temp_aristas[i].v_peso<temp_aristas[j].v_peso)
+                    arista_temporal=temp_aristas[j];
+                    temp_aristas[j]=temp_aristas[i];
+                    temp_aristas[i]=arista_temporal;
+                end
+            end
+        end
+        
+        conjunto_solution[conjunto_solution.length] = temp_aristas[0];
+        ultimo = 0
+        for i in(1..temp_aristas.length-1)
+            control = 1
+            for j in(0..conjunto_solution.length-1)
+                if(conjunto_solution[j].v_origen == temp_aristas[i].v_origen && control == 1)
+                    control = 0
+                else
+                    if(conjunto_solution[j].v_destino == temp_aristas[i].v_destino && control == 1)
+                        control = 0
+                    else
+                        if(conjunto_solution[j].v_origen == temp_aristas[i].v_destino && control == 1)
+                            control = 0
+                        else
+                            if(conjunto_solution[j].v_destino == temp_aristas[i].v_origen && control == 1)
+                                control = 0
+                            end
+                        end
+                    end
+                end
+            end
+            if control == 1
+                conjunto_solution[conjunto_solution.length] = temp_aristas[i]
+                ultimo = i+1
+            end
+        end
+        
+        vertice_Kus = []
+        for i in(0..conjunto_solution.length-1)
+            vertice_Kus[i] = Vertice.new
+            vertice_Kus[i].lista[0] = conjunto_solution[i]
+        end
+        for i in (ultimo..temp_aristas.length-1)
 
+            evalua1= -1
+            evalua2 = -1
+            evalua1_en = -1
+            evalua2_en = -1
+            for j in(0..vertice_Kus.length-1) 
+                cont = 0
+                for k in (0..vertice_Kus[j].lista.length-1)
+                    if(temp_aristas[i].v_origen == vertice_Kus[j].lista[k].v_destino )
+                        cont+=1
+                        evalua1 = j
+                        evalua1_en = k
+                    else
+                        if(temp_aristas[i].v_destino == vertice_Kus[j].lista[k].v_origen )
+                            cont+=1
+                            evalua2 = j
+                            evalua2_en = k
+                        end
+                    end
+                end
+                if(cont >= 1)
+                    j = vertice_Kus.length
+                end 
+            end
+            if(evalua1 != evalua2)
+                if(evalua2 == -1)
+                    vertice_Kus[evalua1].lista[vertice_Kus[evalua1].lista.length] = vertice_Kus[evalua1].lista[0]
+                    vertice_Kus[evalua2].lista.delete_at(evalua2_en)
+                    if(vertice_Kus[evalua2].lista.length == 0)
+                        vertice_Kus.delete_at(evalua2)
+                    end
+                else
+                    vertice_Kus[evalua1].lista[vertice_Kus[evalua1].lista.length] = vertice_Kus[evalua2].lista[evalua2_en]
+                    vertice_Kus[evalua2].lista.delete_at(evalua2_en)
+                    if(vertice_Kus[evalua2].lista.length == 0)
+                        vertice_Kus.delete_at(evalua2)
+                    end
+                end
+                vertice_Kus[evalua1].lista[vertice_Kus[evalua1].lista.length] = temp_aristas[i]
+            end
+        end
+        for i in(0..vertice_Kus[0].lista.length-1)
+            puts vertice_Kus[0].lista[i].toString
+        end
     end
     
     def Floyd
