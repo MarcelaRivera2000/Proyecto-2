@@ -38,25 +38,8 @@ class TDA_Arbol
             puts "ERROR EN EL PROCESO!"
     end
 
-    def codificador_HuffmanMarcela(root)
-        if (!root)
-            return
-        end  
-        if ( !root.hijoDerecho && !root.hijoIzquierdo )
-            print "[#{root.dato.to_i}]"
-            return
-        end
-        if (root.hijoIzquierdo)
-            codificador_Huffman(root.hijoIzquierdo);
-        end
-        if (root.hijoDerecho)
-            codificador_Huffman(root.hijoDerecho);
-        end
-        rescue Exception => exc   
-            puts "ERROR EN EL PROCESO!"
-    end
-
     def codificador_Huffman(texto)
+        bariable=texto
         arreglo2 = Array.new()
         for i in 0..texto.size() - 1 do
             arreglo2 << texto[i]
@@ -85,10 +68,6 @@ class TDA_Arbol
         while caracteres[0] != nil
             nodo1 = Nodo.new()
             nodo1.dato = "#{caracteres[0]}"
-            for i in 0..caracteres.size()-1 do
-                print "<[#{caracteres[i]}]>"
-            end
-            print "\n"
             nodo1.frecuencia = frecuencias[0]
             nodo2 = Nodo.new()
             nodo2.dato = caracteres[1]
@@ -107,9 +86,6 @@ class TDA_Arbol
                     end
                 end
             end 
-            for i in 0..arregloNodo.size()-1 do
-                print " -[#{arregloNodo[i].dato}]- "
-            end
         end
         loop do
             if( arregloNodo[0]!=nil && arregloNodo[1]!=nil ) then break end
@@ -128,38 +104,68 @@ class TDA_Arbol
                 end
             end
             print "\n"
-            for i in 0..arregloNodo.size()-1 do
-                print " >[#{arregloNodo[i].dato}]< "
-            end
             if (arregloNodo[1]==nil)
+                @arregloHojas=Array.new()
+                @arregloBinario=Array.new()
                 raizNueva=Nodo.new()
                 raizNueva=arregloNodo[arregloNodo.size-1]
-                puts "\nraiz: #{raizNueva.frecuencia}"
-                recursivo(raizNueva)
-                for i in 0..@arregloBinario.size() - 1 do
-                    print "[#{@arregloBinario[i]}]"
+                hojas(raizNueva)
+                for i in 0..@arregloHojas.size() - 1 do
+                    print " [#{@arregloHojas[i]}] "
                 end
+                puts "\n"
+                for i in 0..@arregloBinario.size() - 1 do
+                    print " [#{@arregloBinario[i]}] "
+                end
+                x=""
+                for n in 0.. bariable.length-1
+                    for i in 0..@arregloHojas.size() - 1 do
+                        if (bariable[n] == @arregloHojas[i])
+                            x<<"#{@arregloBinario[i]}"
+                            
+                            break
+                        end
+                    end
+                end
+                puts "CODIFICADO: #{x} "
+                puts "\nIngrese el nombre del archivo: "
+                archivo=gets
+                File.write(archivo.delete!("\n")," #{x}")
             end
         end
         rescue Exception => exc   
-        puts "ERROR EN EL PROCESO!"
+        puts "\nERROR EN EL PROCESO!"
     end
 
-    def recursivo(root)
+    def binario(nodo,text)
+        if(nodo.padre!=nil)
+            aux=nodo.padre
+            if(aux.hijoIzquierdo==nodo)
+                text<<"0"
+            elsif (aux.hijoDerecho==nodo)
+                text<<"1"
+            end
+            binario(aux,text)
+        else
+            return text
+        end
+    end
+
+    def hojas(root)
         if (!root)
             return
         end
         if ( !root.hijoDerecho && !root.hijoIzquierdo )
-            print " #[#{root.dato}]# "
+            @arregloHojas.push(root.dato)
+            texto=binario(root,"")
+            @arregloBinario.push(texto.reverse!)
             return
         end
-        if (root.hijoIzquierdo)
-            @arregloBinario.push(0)
-            recursivo(root.hijoIzquierdo);
+        if (root.hijoIzquierdo !=nil)
+            hojas(root.hijoIzquierdo)
         end
-        if (root.hijoDerecho)
-            @arregloBinario.push(1)
-            recursivo(root.hijoDerecho);
+        if (root.hijoDerecho !=nil)
+            hojas(root.hijoDerecho)
         end
     end
 
@@ -238,7 +244,7 @@ class TDA_Arbol
         r.hijoIzquierdo=a1
         r.hijoDerecho=a2
         r.frecuencia=a1.frecuencia.to_i+a2.frecuencia.to_i
-        r.dato=a1.frecuencia.to_i+a2.frecuencia.to_i
+        r.dato="0"
         a1.padre=r
         a2.padre=r
         return r
