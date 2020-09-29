@@ -40,6 +40,7 @@ class TDA_Arbol
 
     def codificador_Huffman(texto)
         bariable=texto
+        cant_nodos=0
         arreglo2 = Array.new()
         for i in 0..texto.size() - 1 do
             arreglo2 << texto[i]
@@ -51,6 +52,7 @@ class TDA_Arbol
                 frecuencias[caracteres.index(texto[i])] = frecuencias[caracteres.index(texto[i])].to_i + 1
             end
         end
+        cant_nodos+=caracteres.size()-1
         for i in 0..caracteres.size()- 1 do
             for j in 0..caracteres.size()-2 do
                 if( frecuencias[j] > frecuencias[j+1] )
@@ -85,7 +87,8 @@ class TDA_Arbol
                         arregloNodo[j] = temp
                     end
                 end
-            end 
+            end
+            cant_nodos+=1
         end
         loop do
             if( arregloNodo[0]!=nil && arregloNodo[1]!=nil ) then break end
@@ -127,10 +130,14 @@ class TDA_Arbol
                         end
                     end
                 end
+                
                 puts "CODIFICADO: #{x} "
-                puts "\nIngrese el nombre del archivo: "
+                puts "\nIngrese el nombre del archivo para guardar el codigo: "
                 archivo=gets
                 File.write(archivo.delete!("\n")," #{x}")
+                puts "\nIngrese el nombre del archivo para guardar la matriz: "
+                archivo=gets
+                escribir(raizNueva,archivo,cant_nodos)
             end
         end
         rescue Exception => exc   
@@ -169,11 +176,11 @@ class TDA_Arbol
         end
     end
 
-    def escribir(raiz)
-        puts "\nIngrese el nombre del archivo: "
-        archivo=gets
-        while (raiz!=nil )
-            File.write(archivo.delete!("\n"),"#{raiz.hijoIzquierdo.frecuencia},#{raiz.hijoIzquierdo.dato} ;#{raiz.hijoDerecho.frecuencia},#{raiz.hijoDerecho.dato}")
+    def escribir(raiz,archivo,cant_nodos)
+        if raiz!=nil 
+            File.write(archivo.delete!("\n"),"#{cant_nodos}\n#{raiz.hijoIzquierdo.frecuencia},#{raiz.hijoIzquierdo.dato} ;#{raiz.hijoDerecho.frecuencia},#{raiz.hijoDerecho.dato}")
+            escribir(raiz.hijoIzquierdo)
+            escribir(raiz.hijoDerecho)
         end
         rescue Exception => exc   
             puts "ERROR EN EL PROCESO!"
